@@ -1,35 +1,35 @@
-export type messagesPage = {
+import {addPostActionType, profileReducer, updateNewPostsTextActionType} from "./profile-reducer";
+import {dialogsReducer, sendMessageActionType, updateNewMessageTextActionType} from "./dialogs-reducer";
+
+type dialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
+    newMessageText: string
 }
-export type profilePage = {
+type profilePageType = {
     posts: Array<PostsType>,
     newPostText: string
 }
-export type DialogsType = {
+type DialogsType = {
     id: number, name: string
 }
-export type MessagesType = {
+type MessagesType = {
     id: number, text: string
 }
-export type PostsType = {
+type PostsType = {
     id: number, date: string, message: string, likeCount: number
 }
-export type StateType = {
-    profilePage: profilePage
-    messagesPage: messagesPage
+type StateType = {
+    profilePage: profilePageType
+    dialogsPage: dialogsPageType
 }
-export type ActionsType = addPostActionType | updateNewPostsTextActionType
-type addPostActionType = {
-    type: 'ADD-POST'
-}
-type updateNewPostsTextActionType = {
-    type: 'UPDATE-NEW-POSTS-TEXT'
-    newPost: string
-}
-// type addPostActionType = ReturnType<typeof addPostActionCreator>
-// type updateNewPostsTextActionType = ReturnType<typeof updateNewPostsTextActionCreator>
-export type storeType = {
+type ActionsType =
+    addPostActionType
+    | updateNewPostsTextActionType
+    | updateNewMessageTextActionType
+    | sendMessageActionType
+
+type storeType = {
     _state: StateType
     _rerender: () => void
     subscribe: (observer: () => void) => void
@@ -37,7 +37,7 @@ export type storeType = {
     dispatch: (action: ActionsType) => void
 }
 
-export const store: storeType = {
+const store: storeType = {
     _state: {
         profilePage: {
             posts: [
@@ -49,7 +49,7 @@ export const store: storeType = {
             ],
             newPostText: 'it-kamasutra.com'
         },
-        messagesPage: {
+        dialogsPage: {
             messages: [
                 {id: 1, text: "Hello"},
                 {id: 2, text: "How are you?"},
@@ -61,6 +61,7 @@ export const store: storeType = {
                 {id: 3, name: "Asya"},
                 {id: 4, name: "..."},
             ],
+            newMessageText: ''
         }
     },
     _rerender() {
@@ -72,23 +73,10 @@ export const store: storeType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost: PostsType = {
-                id: 6,
-                date: "02.11.2022",
-                message: this._state.profilePage.newPostText,
-                likeCount: 3
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._rerender()
-        } else if (action.type === 'UPDATE-NEW-POSTS-TEXT') {
-            this._state.profilePage.newPostText = action.newPost
-            this._rerender()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._rerender()
     }
 }
-export const addPostActionCreator = (): ActionsType => ({type: 'ADD-POST'}) //as const)
-export const updateNewPostsTextActionCreator = (newPost: string): ActionsType => {
-    return {type: 'UPDATE-NEW-POSTS-TEXT', newPost: newPost} //as const
-}
+
+

@@ -1,27 +1,24 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {
-    ActionsType,
-    addPostActionCreator,
-    PostsType,
-    storeType,
-    updateNewPostsTextActionCreator
-} from "../../../redux/state";
+import {profilePageType} from "../../../redux/redux-store";
 
 type MyPostsPropsType = {
-    store: storeType
-    posts: Array<PostsType>
+    profilePage: profilePageType
+    addPost: () => void
+    updateNewPostText: (newText:string) => void
 }
 
 export function MyPosts(props: MyPostsPropsType) {
-    let postsElements = props.posts
+    let postsElements = props.profilePage.posts
         .map(p => <Post id={p.id} date={p.date} message={p.message}
                         likeCount={p.likeCount}/>)
 
-    const onclickAddHandler = () => props.store.dispatch(addPostActionCreator())
+    const onclickAddHandler = () => {
+        props.addPost()
+    }
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.store.dispatch(updateNewPostsTextActionCreator(e.currentTarget.value))
+        props.updateNewPostText(e.currentTarget.value)
     }
 
     return <div className={s.postsBlock}>
@@ -30,7 +27,7 @@ export function MyPosts(props: MyPostsPropsType) {
             <div>
                 <textarea
                     onChange={onPostChangeHandler}
-                    value={props.store.getState().profilePage.newPostText}
+                    value={props.profilePage.newPostText}
                 />
             </div>
             <div>
