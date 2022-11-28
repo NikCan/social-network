@@ -1,22 +1,21 @@
-import React, {ChangeEvent} from "react";
-import {Message} from "./Message/Message";
-import {DialogItem} from "./DialogItem/DialogItem";
+import React from "react";
 import {sendMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
-import {storeType} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
+import {StoreContext} from "../../StoreContext";
 
-type DialogsContainerPropsType = {
-    store: storeType
-}
+type DialogsContainerPropsType = {}
 
 export const DialogsContainer = (props: DialogsContainerPropsType) => {
-    const sendMessageHandler = () => props.store.dispatch(sendMessageActionCreator())
-    const updateNewMessageTextHandler = (newMessageText: string) => {
-        props.store.dispatch(updateNewMessageTextActionCreator(newMessageText))
-    }
-
-    return <Dialogs dialogsPage={props.store.getState().dialogsPage}
-                    updateNewMessageText={updateNewMessageTextHandler}
-                    sendMessage={sendMessageHandler}/>
+    return <StoreContext.Consumer>
+        {(store) => {
+            const sendMessageHandler = () => store.dispatch(sendMessageActionCreator())
+            const updateNewMessageTextHandler = (newMessageText: string) => {
+                store.dispatch(updateNewMessageTextActionCreator(newMessageText))
+            }
+            return <Dialogs dialogsPage={store.getState().dialogsPage}
+                            updateNewMessageText={updateNewMessageTextHandler}
+                            sendMessage={sendMessageHandler}/>
+        }
+        }
+    </StoreContext.Consumer>
 }
-

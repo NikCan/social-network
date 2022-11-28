@@ -1,11 +1,10 @@
-import {combineReducers} from "redux";
+import {combineReducers, createStore} from "redux";
 import {addPostActionType, profileReducer, updateNewPostsTextActionType} from "./profile-reducer";
 import {
     dialogsReducer,
     sendMessageActionType,
     updateNewMessageTextActionType
 } from "./dialogs-reducer";
-import {configureStore} from "@reduxjs/toolkit";
 export type storeType = typeof store
 export type DialogsType = {
     id: number, name: string
@@ -25,7 +24,6 @@ export type profilePageType = {
 export type PostsType = {
     id: number, date: string, message: string, likeCount: number
 }
-export type StateType = ReturnType<typeof reducers>
 export type ActionsType =
     addPostActionType
     | updateNewPostsTextActionType
@@ -37,4 +35,4 @@ const reducers = combineReducers({
     dialogsPage: dialogsReducer
 })
 
-export const store = configureStore({reducer: reducers})
+export const store = createStore(reducers)

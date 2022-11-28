@@ -11,8 +11,8 @@ type MyPostsPropsType = {
 
 export function MyPosts(props: MyPostsPropsType) {
     let postsElements = props.profilePage.posts
-        .map(p => <Post id={p.id} date={p.date} message={p.message}
-                        likeCount={p.likeCount}/>)
+        .map((p, index) => <Post id={p.id} date={p.date} message={p.message}
+                        likeCount={p.likeCount} key={index}/>)
 
     const onclickAddHandler = () => {
         props.addPost()

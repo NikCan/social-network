@@ -6,18 +6,18 @@ import {dialogsPageType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
     dialogsPage: dialogsPageType
-    updateNewMessageText: (newMessageText:string) => void
+    updateNewMessageText: (newMessageText: string) => void
     sendMessage: () => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
     const dialogsElements = props.dialogsPage.dialogs
-        .map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+        .map((dialog, index) => <DialogItem name={dialog.name} id={dialog.id} key={index}/>)
 
     const messagesElements = props.dialogsPage.messages
-        .map(message => <Message text={message.text} id={message.id}/>)
+        .map((message, index) => <Message text={message.text} id={message.id} key={index}/>)
 
-    const onClickSendHandler = () => props.sendMessage
+    const onClickSendHandler = () => props.sendMessage()
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageText(e.currentTarget.value)
     }

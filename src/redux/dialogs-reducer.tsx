@@ -20,7 +20,7 @@ const initialState: dialogsPageType = {
         {id: 3, name: "Asya"},
         {id: 4, name: "..."},
     ],
-    newMessageText: ''
+    newMessageText: 'type message'
 }
 export const dialogsReducer = (state: dialogsPageType = initialState, action: ActionsType): dialogsPageType => {
     if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
