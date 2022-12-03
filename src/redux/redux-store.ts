@@ -6,33 +6,17 @@ import {
     updateNewMessageTextActionType
 } from "./dialogs-reducer";
 export type storeType = typeof store
-export type DialogsType = {
-    id: number, name: string
-}
-export type MessagesType = {
-    id: number, text: string
-}
-export type dialogsPageType = {
-    messages: Array<MessagesType>
-    dialogs: Array<DialogsType>
-    newMessageText: string
-}
-export type profilePageType = {
-    posts: Array<PostsType>,
-    newPostText: string
-}
-export type PostsType = {
-    id: number, date: string, message: string, likeCount: number
-}
+export type stateType = ReturnType<typeof rootReducer>
+
 export type ActionsType =
     addPostActionType
     | updateNewPostsTextActionType
     | updateNewMessageTextActionType
     | sendMessageActionType
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer
 })
 
-export const store = createStore(reducers)
+export const store = createStore(rootReducer)

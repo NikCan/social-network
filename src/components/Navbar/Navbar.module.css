@@ -2,6 +2,8 @@
     grid-area: n;
     background-color: cornflowerblue;
     padding: 20px;
+    font-size: x-large;
+    padding-left: 20px;
 }
 .item a {
     color: white;
