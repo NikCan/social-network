@@ -1,24 +1,10 @@
-/*.dialogs {*/
-/*    display: grid;*/
-/*    grid-template-columns: 1fr 4fr;*/
-/*}*/
+.usersBlock {
+}
 
-/*.dialogs .dialogItems {*/
-/*    padding: 10px;*/
-/*}*/
 
-/*.dialogs .dialogItems .active {*/
-/*    color: gold;*/
-/*}*/
+.userPhoto {
+    width: 100px;
+}
 
-/*.dialogs .dialogItems .dialog {*/
-
-/*}*/
-
-/*.dialogs .messages {*/
-/*    padding: 10px;*/
-/*}*/
-
-/*dialogs .messages .message {*/
-
-/*}*/
+.button {
+}
