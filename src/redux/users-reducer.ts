@@ -55,7 +55,7 @@ const initialState: usersPageType = {
             location: {city: "Novgorod", country: "Russia"},
             followed: false
         },
-    ],
+    ]
 }
 
 export const usersReducer = (state = initialState, action: ActionsType): usersPageType => {
