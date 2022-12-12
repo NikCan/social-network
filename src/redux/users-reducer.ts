@@ -7,6 +7,8 @@ export type setUsersActionType = ReturnType<typeof setUsersAC>
 
 export type usersPageType = {
     users: Array<userType>,
+    pageSize: number,
+    totalUsersCount: number,
 }
 export type userType = {
     id: string
@@ -22,40 +24,9 @@ export const unfollowAC = (userId: string) => ({type: 'UNFOLLOW', userId: userId
 export const setUsersAC = (users: Array<userType>) => ({type: 'SET_USERS', users: users} as const)
 
 const initialState: usersPageType = {
-    users: [
-        {
-            id: v1(),
-            photoUrl: "https://funart.pro/uploads/posts/2022-05/1652743715_2-funart-pro-p-belochka-svoimi-rukami-zhivotnie-krasivo-f-2.jpg",
-            name: "Nikita",
-            status: "I'm worker",
-            location: {city: "Novgorod", country: "Russia"},
-            followed: true
-        },
-        {
-            id: v1(),
-            photoUrl: "https://funart.pro/uploads/posts/2022-05/1652743715_2-funart-pro-p-belochka-svoimi-rukami-zhivotnie-krasivo-f-2.jpg",
-            name: "Dasha",
-            status: "I'm happy!",
-            location: {city: "Novgorod", country: "Russia"},
-            followed: true
-        },
-        {
-            id: v1(),
-            photoUrl: "https://funart.pro/uploads/posts/2022-05/1652743715_2-funart-pro-p-belochka-svoimi-rukami-zhivotnie-krasivo-f-2.jpg",
-            name: "Asya",
-            status: "I'm a child",
-            location: {city: "Novgorod", country: "Russia"},
-            followed: true
-        },
-        {
-            id: v1(),
-            name: "Chloya",
-            photoUrl: "https://funart.pro/uploads/posts/2022-05/1652743715_2-funart-pro-p-belochka-svoimi-rukami-zhivotnie-krasivo-f-2.jpg",
-            status: "Mao",
-            location: {city: "Novgorod", country: "Russia"},
-            followed: false
-        },
-    ]
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
 }
 
 export const usersReducer = (state = initialState, action: ActionsType): usersPageType => {

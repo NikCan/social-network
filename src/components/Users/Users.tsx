@@ -1,11 +1,10 @@
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
-import {userType} from "../../redux/users-reducer";
 import s from "./Users.module.css"
 import axios from "axios";
 import userAvatar from "../../assets/images/avatar.png"
 
-export const Users = (props: UsersPropsType) => {
+const Users = (props: UsersPropsType) => {
     const onClickFollowHandler = (userId: string) => {
         props.follow(userId)
     }
@@ -20,7 +19,7 @@ export const Users = (props: UsersPropsType) => {
 
     return <div className={s.usersBlock}>
         {
-            props.usersPage.users.map(el =>
+            props.users.map(el =>
                 <div key={el.id}>
                     <div>
                         <img className={s.userPhoto}
