@@ -1,34 +1,46 @@
 import React from "react";
-import {UsersPropsType} from "./UsersContainer";
 import s from "./Users.module.css"
-import axios from "axios";
 import userAvatar from "../../assets/images/avatar.png"
+import classNames from "classnames";
+import {userType} from "../../redux/users-reducer";
 
-const Users = (props: UsersPropsType) => {
-    const onClickFollowHandler = (userId: string) => {
-        props.follow(userId)
-    }
-    const onClickUnfollowHandler = (userId: string) => {
-        props.unfollow(userId)
-    }
-    const onClickAddUsersHandler = () => {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            props.setUsers(response.data.items)
-        })
+type PropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    users: userType[]
+    onClickFollowHandler: (userId: string) => void
+    onClickUnfollowHandler: (userId: string) => void
+    onPageChanged: (pageNumber: number) => void
+
+}
+export const Users = (props: PropsType) => {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
     return <div className={s.usersBlock}>
+        <div>
+            {pages.map((p, i) => {
+                    return <span key={i} className={classNames({
+                        [s.selectedPage]: p === props.currentPage
+                    })} onClick={() => props.onPageChanged(p)}>{p}</span>;
+                }
+            )}
+        </div>
         {
             props.users.map(el =>
                 <div key={el.id}>
                     <div>
-                        <img className={s.userPhoto}
+                        <img className={s.userPhoto} alt={"user photo"}
                              src={el.photoUrl != null ? el.photoUrl : userAvatar}/>
                     </div>
                     <div>{!el.followed ? <button className={s.button}
-                                                 onClick={() => onClickFollowHandler(el.id)}>follow</button>
+                                                 onClick={() => props.onClickFollowHandler(el.id)}>follow</button>
                         : <button className={s.button}
-                                  onClick={() => onClickUnfollowHandler(el.id)}>unfollow</button>}
+                                  onClick={() => props.onClickUnfollowHandler(el.id)}>unfollow</button>}
                     </div>
                     <div>
                         <div>{el.name}</div>
@@ -40,6 +52,5 @@ const Users = (props: UsersPropsType) => {
                 </div>
             )
         }
-        <button onClick={onClickAddUsersHandler}>Add users</button>
     </div>
 }

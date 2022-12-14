@@ -1,7 +1,13 @@
 import {combineReducers, createStore} from "redux";
 import {addPostActionType, profileReducer, updateNewPostsTextActionType} from "./profile-reducer";
 import {dialogsReducer, sendMessageActionType, updateNewMessageTextActionType} from "./dialogs-reducer";
-import {followActionType, setUsersActionType, unfollowActionType, usersReducer} from "./users-reducer";
+import {
+    followActionType,
+    setCurrentPageActionType, setTotalUsersCountActionType,
+    setUsersActionType,
+    unfollowActionType,
+    usersReducer
+} from "./users-reducer";
 
 export type storeType = typeof store
 export type stateType = ReturnType<typeof rootReducer>
@@ -14,6 +20,8 @@ export type ActionsType =
     | followActionType
     | unfollowActionType
     | setUsersActionType
+    | setCurrentPageActionType
+    | setTotalUsersCountActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
