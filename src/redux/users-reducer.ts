@@ -1,11 +1,11 @@
 import {ActionsType} from "./redux-store";
 
-export type followActionType = ReturnType<typeof followAC>
-export type unfollowActionType = ReturnType<typeof unfollowAC>
-export type setUsersActionType = ReturnType<typeof setUsersAC>
-export type setCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
-export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
-export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetchingAC>
+export type followActionType = ReturnType<typeof follow>
+export type unfollowActionType = ReturnType<typeof unfollow>
+export type setUsersActionType = ReturnType<typeof setUsers>
+export type setCurrentPageActionType = ReturnType<typeof setCurrentPage>
+export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
+export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 
 export type InitialStateType = {
     users: Array<userType>
@@ -23,12 +23,12 @@ export type userType = {
     followed: boolean
 }
 
-export const followAC = (userId: string) => ({type: 'FOLLOW', userId: userId} as const)
-export const unfollowAC = (userId: string) => ({type: 'UNFOLLOW', userId: userId} as const)
-export const setUsersAC = (users: Array<userType>) => ({type: 'SET-USERS', users: users} as const)
-export const setCurrentPageAC = (pageNumber:number) => ({type: 'SET-CURRENT-PAGE', pageNumber} as const)
-export const setTotalUsersCountAC = (totalCount:number) => ({type: 'SET-TOTAL-COUNT', totalCount} as const)
-export const toggleIsFetchingAC = (isFetching:boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
+export const follow = (userId: string) => ({type: 'FOLLOW', userId: userId} as const)
+export const unfollow = (userId: string) => ({type: 'UNFOLLOW', userId: userId} as const)
+export const setUsers = (users: Array<userType>) => ({type: 'SET-USERS', users: users} as const)
+export const setCurrentPage = (pageNumber:number) => ({type: 'SET-CURRENT-PAGE', pageNumber} as const)
+export const setTotalUsersCount = (totalCount:number) => ({type: 'SET-TOTAL-COUNT', totalCount} as const)
+export const toggleIsFetching = (isFetching:boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
 
 const initialState: InitialStateType = {
     users: [],
