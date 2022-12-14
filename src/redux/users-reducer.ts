@@ -5,12 +5,14 @@ export type unfollowActionType = ReturnType<typeof unfollowAC>
 export type setUsersActionType = ReturnType<typeof setUsersAC>
 export type setCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
 export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
+export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetchingAC>
 
-export type usersPageType = {
-    users: Array<userType>,
-    pageSize: number,
-    totalUsersCount: number,
+export type InitialStateType = {
+    users: Array<userType>
+    pageSize: number
+    totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 export type userType = {
     id: string
@@ -26,15 +28,17 @@ export const unfollowAC = (userId: string) => ({type: 'UNFOLLOW', userId: userId
 export const setUsersAC = (users: Array<userType>) => ({type: 'SET-USERS', users: users} as const)
 export const setCurrentPageAC = (pageNumber:number) => ({type: 'SET-CURRENT-PAGE', pageNumber} as const)
 export const setTotalUsersCountAC = (totalCount:number) => ({type: 'SET-TOTAL-COUNT', totalCount} as const)
+export const toggleIsFetchingAC = (isFetching:boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
 
-const initialState: usersPageType = {
+const initialState: InitialStateType = {
     users: [],
     pageSize: 50,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 }
 
-export const usersReducer = (state = initialState, action: ActionsType): usersPageType => {
+export const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case "FOLLOW":
             return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: true} : el)}
@@ -46,6 +50,8 @@ export const usersReducer = (state = initialState, action: ActionsType): usersPa
             return {...state, currentPage: action.pageNumber}
         case "SET-TOTAL-COUNT":
             return {...state, totalUsersCount: action.totalCount}
+        case "TOGGLE-IS-FETCHING":
+            return {...state, isFetching: action.isFetching}
         default:
             return state
     }
