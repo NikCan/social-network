@@ -21,14 +21,18 @@ export type userType = {
     status: string
     location: { city: string, country: string }
     followed: boolean
+    photos: {
+        small: string
+        large: string
+    }
 }
 
 export const follow = (userId: string) => ({type: 'FOLLOW', userId: userId} as const)
 export const unfollow = (userId: string) => ({type: 'UNFOLLOW', userId: userId} as const)
 export const setUsers = (users: Array<userType>) => ({type: 'SET-USERS', users: users} as const)
-export const setCurrentPage = (pageNumber:number) => ({type: 'SET-CURRENT-PAGE', pageNumber} as const)
-export const setTotalUsersCount = (totalUsersCount:number) => ({type: 'SET-TOTAL-COUNT', totalUsersCount} as const)
-export const toggleIsFetching = (isFetching:boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
+export const setCurrentPage = (pageNumber: number) => ({type: 'SET-CURRENT-PAGE', pageNumber} as const)
+export const setTotalUsersCount = (totalUsersCount: number) => ({type: 'SET-TOTAL-COUNT', totalUsersCount} as const)
+export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
 
 const initialState: InitialStateType = {
     users: [],
