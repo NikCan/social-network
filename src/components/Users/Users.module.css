@@ -1,5 +1,6 @@
 .usersBlock {
 }
+
 .usersBlock span {
     cursor: pointer;
     margin: 2px;
@@ -12,6 +13,11 @@
 }
 
 .button {
+}
+
+.selectPageBlock {
+    flex-wrap: wrap;
+    display: flex;
 }
 
 .selectedPage {
