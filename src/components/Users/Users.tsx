@@ -5,6 +5,7 @@ import classNames from "classnames";
 import {userType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {follow, unfollow} from "../../api/api";
 
 type PropsType = {
     totalUsersCount: number
@@ -44,27 +45,15 @@ export const Users = (props: PropsType) => {
                     <div> {!el.followed
                         ? <button className={s.button}
                                   onClick={() => {
-                                      axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
-                                          withCredentials: true,
-                                          headers: {
-                                              "API-KEY": "08432b91-d4bc-4747-ad4e-b220e331fd94"
-                                          }
+                                      follow(el.id).then((data) => {
+                                          if (data.resultCode === 0) props.onClickFollowHandler(el.id)
                                       })
-                                          .then((res) => {
-                                              console.log(res.data)
-                                              if (res.data.resultCode === 0) props.onClickFollowHandler(el.id)
-                                          })
                                   }}>follow</button>
                         : <button className={s.button}
                                   onClick={() => {
-                                      axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
-                                          withCredentials: true,
-                                          headers: {
-                                              "API-KEY": '08432b91-d4bc-4747-ad4e-b220e331fd94'
-                                          }
-                                      })
-                                          .then((res) => {
-                                              if (res.data.resultCode === 0) props.onClickUnfollowHandler(el.id)
+                                      unfollow(el.id)
+                                          .then((data) => {
+                                              if (data.resultCode === 0) props.onClickUnfollowHandler(el.id)
                                           })
                                   }}>unfollow</button>}
                     </div>
