@@ -39,7 +39,7 @@ export const addPostActionCreator = (): ActionsType => ({type: 'ADD-POST'})
 export const updateNewPostsTextActionCreator = (newPost: string): ActionsType => {
     return {type: 'UPDATE-NEW-POSTS-TEXT', newPost: newPost}
 }
-export const setUserProfile = (profile: any) => ({type: 'SET-USER-PROFILE', profile} as const)
+export const setUserProfile = (profile: userProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
 
 const initialState: profilePageType = {
     posts: [

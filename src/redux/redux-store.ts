@@ -13,6 +13,7 @@ import {
     unfollowActionType,
     usersReducer
 } from "./users-reducer";
+import {authReducer, setAuthUserDataActionType} from "./auth-reducer";
 
 export type storeType = typeof store
 export type stateType = ReturnType<typeof rootReducer>
@@ -29,11 +30,13 @@ export type ActionsType =
     | setTotalUsersCountActionType
     | toggleIsFetchingActionType
     | setUserProfileActionType
+    | setAuthUserDataActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 export const store = createStore(rootReducer)
