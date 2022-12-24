@@ -9,7 +9,7 @@ import {dialogsReducer, sendMessageActionType, updateNewMessageTextActionType} f
 import {
     followActionType,
     setCurrentPageActionType, setTotalUsersCountActionType,
-    setUsersActionType, toggleIsFetchingActionType,
+    setUsersActionType, toggleIsFetchingActionType, toggleFollowingProgress, toggleFollowingProgressActionType,
     unfollowActionType,
     usersReducer
 } from "./users-reducer";
@@ -31,6 +31,7 @@ export type ActionsType =
     | toggleIsFetchingActionType
     | setUserProfileActionType
     | setAuthUserDataActionType
+    | toggleFollowingProgressActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,

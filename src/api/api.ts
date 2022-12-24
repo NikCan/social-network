@@ -13,17 +13,22 @@ export const getUsers = (currentPage: number = 1, pageSize: number = 10) => {
         .then(res => res.data)
 }
 
-export const follow = (id: string) => {
+export const follow = (id: number) => {
     return instance.post(`follow/${id}`)
         .then(res => res.data)
 }
 
-export const unfollow = (id: string) => {
+export const unfollow = (id: number) => {
     return instance.delete(`follow/${id}`)
         .then(res => res.data)
 }
 
 export const me = () => {
     return instance.get('auth/me')
+        .then(res => res.data)
+}
+
+export const getUser = (userId:number|null) => {
+    return instance.get(`profile/` + userId)
         .then(res => res.data)
 }
