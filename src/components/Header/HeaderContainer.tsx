@@ -4,14 +4,14 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {stateType} from "../../redux/redux-store";
 import {setAuthUserData} from "../../redux/auth-reducer";
-import {me} from "../../api/api";
+import {api} from "../../api/api";
 
 type HeaderPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
     componentDidMount() {
-        me().then((data) => {
+        api.me().then((data) => {
             if (data.resultCode === 0) {
                 const {id, login, email} = data.data
                 this.props.setAuthUserData(id, login, email)

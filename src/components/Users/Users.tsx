@@ -4,7 +4,7 @@ import userAvatar from "../../assets/images/avatar.png"
 import classNames from "classnames";
 import {userType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {follow, unfollow} from "../../api/api";
+import {api} from "../../api/api";
 
 type PropsType = {
     totalUsersCount: number
@@ -46,7 +46,7 @@ export const Users = (props: PropsType) => {
                         ? <button className={s.button}
                                   onClick={() => {
                                       props.toggleFollowingProgress(el.id, true)
-                                      follow(el.id).then((data) => {
+                                      api.follow(el.id).then((data) => {
                                           if (data.resultCode === 0) {
                                               props.onClickFollowHandler(el.id)
                                           }
@@ -57,7 +57,7 @@ export const Users = (props: PropsType) => {
                         : <button className={s.button}
                                   onClick={() => {
                                       props.toggleFollowingProgress(el.id, true)
-                                      unfollow(el.id)
+                                      api.unfollow(el.id)
                                           .then((data) => {
                                               if (data.resultCode === 0) {
                                                   props.onClickUnfollowHandler(el.id)
