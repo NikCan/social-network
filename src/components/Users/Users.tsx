@@ -12,7 +12,6 @@ type PropsType = {
     users: userType[]
     followingInProgress: number[]
     onPageChanged: (pageNumber: number) => void
-    toggleFollowingProgress: (id: number, followingInProgress: boolean) => void
     followThunk: (id: number) => void
     unfollowThunk: (id: number) => void
 }

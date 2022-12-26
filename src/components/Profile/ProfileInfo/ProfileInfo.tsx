@@ -2,6 +2,7 @@ import React from "react";
 import s from "./ProfileInfo.module.css"
 import {Preloader} from "../../common/Preloader/Preloader";
 import {userProfileType} from "../../../redux/profile-reducer";
+import defaultPhoto from "../../../assets/images/default-profile-photo.jpg"
 
 type ProfileInfoPropsType = {
     profile: userProfileType
@@ -14,7 +15,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
                       alt=""/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large} alt="user-photo"/>
+                <img src={props.profile.photos.large || defaultPhoto} alt="user-photo"/>
                 <h2>{props.profile.fullName}</h2>
                 <div>My contacts: {props.profile.contacts.facebook}</div>
             </div>

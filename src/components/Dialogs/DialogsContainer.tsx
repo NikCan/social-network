@@ -11,6 +11,7 @@ import {Dispatch} from "redux";
 
 type mapStateToPropsType = {
     dialogsPage: dialogsPageType
+    isAuth: boolean
 }
 type mapDispatchToPropsType = {
     updateNewMessageText: (newText: string) => void
@@ -21,7 +22,8 @@ export type DialogsPropsType = mapStateToPropsType&mapDispatchToPropsType
 
 const mapStateToProps = (state:stateType):mapStateToPropsType => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
