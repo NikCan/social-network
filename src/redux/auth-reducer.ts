@@ -1,4 +1,6 @@
 import {ActionsType} from "./redux-store";
+import {Dispatch} from "redux";
+import {api} from "../api/api";
 
 export type setAuthUserDataActionType = ReturnType<typeof setAuthUserData>
 
@@ -29,5 +31,16 @@ export const authReducer = (state = initialState, action: ActionsType): AuthStat
             return {...state, ...action.data, isAuth: true}
         default:
             return state
+    }
+}
+
+export const getMyProfile = () => {
+    return (dispatch: Dispatch) => {
+        api.getMyProfile().then((data) => {
+            if (data.resultCode === 0) {
+                const {id, login, email} = data.data
+                dispatch(setAuthUserData(id, login, email))
+            }
+        })
     }
 }

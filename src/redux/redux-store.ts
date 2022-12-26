@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {
     addPostActionType,
     profileReducer,
@@ -9,11 +9,12 @@ import {dialogsReducer, sendMessageActionType, updateNewMessageTextActionType} f
 import {
     followActionType,
     setCurrentPageActionType, setTotalUsersCountActionType,
-    setUsersActionType, toggleIsFetchingActionType, toggleFollowingProgress, toggleFollowingProgressActionType,
+    setUsersActionType, toggleIsFetchingActionType, toggleFollowingProgressActionType,
     unfollowActionType,
-    usersReducer
+    usersReducer, getUsers
 } from "./users-reducer";
 import {authReducer, setAuthUserDataActionType} from "./auth-reducer";
+import thunk from "redux-thunk";
 
 export type storeType = typeof store
 export type stateType = ReturnType<typeof rootReducer>
@@ -40,6 +41,6 @@ const rootReducer = combineReducers({
     auth: authReducer
 })
 
-export const store = createStore(rootReducer)
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 //@ts-ignore
 window.store = store

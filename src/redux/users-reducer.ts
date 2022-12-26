@@ -1,4 +1,6 @@
 import {ActionsType} from "./redux-store";
+import {api} from "../api/api";
+import {Dispatch} from "redux";
 
 export type followActionType = ReturnType<typeof follow>
 export type unfollowActionType = ReturnType<typeof unfollow>
@@ -71,5 +73,39 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
                 : {...state, followingInProgress: state.followingInProgress.filter(el => el !== action.id)}
         default:
             return state
+    }
+}
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetching(true))
+        api.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
+    }
+}
+
+export const followThunk = (id: number) => {
+    return (dispatch: Dispatch) => {
+       dispatch(toggleFollowingProgress(id, true))
+        api.follow(id).then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(follow(id))
+            }
+            dispatch(toggleFollowingProgress(id, false))
+        })
+    }
+}
+
+export const unfollowThunk = (id: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleFollowingProgress(id, true))
+        api.unfollow(id).then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(unfollow(id))
+            }
+            dispatch(toggleFollowingProgress(id, false))
+        })
     }
 }

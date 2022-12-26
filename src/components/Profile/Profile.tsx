@@ -4,7 +4,6 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {userProfileType} from "../../redux/profile-reducer";
 
 type PropsType = {
-    setUserProfile: (profile: userProfileType) => void
     profile: userProfileType
     children?: ReactNode
 }

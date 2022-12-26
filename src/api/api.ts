@@ -21,7 +21,7 @@ export const api = {
         return instance.delete(`follow/${id}`)
             .then(res => res.data)
     },
-    me() {
+    getMyProfile() {
         return instance.get('auth/me')
             .then(res => res.data)
     },
