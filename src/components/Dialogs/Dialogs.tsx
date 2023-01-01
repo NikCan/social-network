@@ -16,7 +16,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageText(e.currentTarget.value)
     }
-    return !props.isAuth ? <Redirect to={'/login'}/> : <div className={s.dialogs}>
+    return <div className={s.dialogs}>
         <div className={s.dialogItems}>
             {dialogsElements}
         </div>
