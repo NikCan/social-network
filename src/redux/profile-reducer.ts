@@ -1,7 +1,6 @@
 import {ActionsType} from "./redux-store";
 import {Dispatch} from "redux";
-import {api} from "../api/api";
-import {toggleFollowingProgress, unfollow} from "./users-reducer";
+import {profileAPI} from "../api/api";
 
 export type addPostActionType = { type: 'ADD-POST' }
 export type updateNewPostsTextActionType = {
@@ -75,7 +74,7 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
 
 export const getUser = (userId: number) => {
     return (dispatch: Dispatch) => {
-        api.getUser(userId).then(data => {
+        profileAPI.getProfile(userId).then(data => {
             dispatch(setUserProfile(data))
         })
     }
