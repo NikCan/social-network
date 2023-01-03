@@ -9,7 +9,7 @@ export type formDataType = {
 export const LoginForm = reduxForm<formDataType>({
     form: 'login'
 })((props: InjectedFormProps<formDataType>) => {
-            return <>
+        return <>
             <form onSubmit={props.handleSubmit}>
                 <div><Field placeholder={"Login"} name={"login"} component={"input"}/></div>
                 <div><Field placeholder={"Password"} name={"password"} component={"input"}/></div>

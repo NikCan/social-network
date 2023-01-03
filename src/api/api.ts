@@ -1,4 +1,5 @@
 import axios from "axios";
+import {regDataType} from "../redux/auth-reducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -43,4 +44,8 @@ export const authAPI = {
         return instance.get('auth/me')
             .then(res => res.data)
     },
+    login(regData: regDataType) {
+        return instance.post('auth/login', regData)
+            .then(res => res.data)
+    }
 }

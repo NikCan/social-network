@@ -13,7 +13,7 @@ import {
     unfollowActionType,
     usersReducer, getUsers
 } from "./users-reducer";
-import {authReducer, setAuthUserDataActionType} from "./auth-reducer";
+import {authReducer, postAuthUserDataActionType, setAuthUserDataActionType} from "./auth-reducer";
 import thunk from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
 
@@ -35,6 +35,7 @@ export type ActionsType =
     | setAuthUserDataActionType
     | toggleFollowingProgressActionType
     | setUserStatusActionType
+    | postAuthUserDataActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
