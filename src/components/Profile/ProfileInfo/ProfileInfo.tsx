@@ -7,9 +7,12 @@ import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: userProfileType
+    updateStatus: (newStatus: string) => void
+    status: string
 }
 
 export function ProfileInfo(props: ProfileInfoPropsType) {
+    console.log('info')
     return !props.profile ? <Preloader/>
         : <div>
             {/*<div><img className={s.profileImg} src="https://i.artfile.ru/2560x1440_1526360_[www.ArtFile.ru].jpg"*/}
@@ -17,7 +20,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large || defaultPhoto} alt="user-photo"/>
-                <ProfileStatus status={"Hello everybody!"}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <h2>{props.profile.fullName}</h2>
                 <div>My contacts: {props.profile.contacts.facebook}</div>
             </div>

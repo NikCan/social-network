@@ -2,8 +2,8 @@ import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {
     addPostActionType,
     profileReducer,
-    setUserProfileActionType,
-    updateNewPostsTextActionType
+    setUserProfileActionType, setUserStatusActionType,
+    updateNewPostsTextActionType,
 } from "./profile-reducer";
 import {dialogsReducer, sendMessageActionType, updateNewMessageTextActionType} from "./dialogs-reducer";
 import {
@@ -33,6 +33,7 @@ export type ActionsType =
     | setUserProfileActionType
     | setAuthUserDataActionType
     | toggleFollowingProgressActionType
+    | setUserStatusActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
