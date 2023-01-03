@@ -12,7 +12,6 @@ type ProfileInfoPropsType = {
 }
 
 export function ProfileInfo(props: ProfileInfoPropsType) {
-    console.log('info')
     return !props.profile ? <Preloader/>
         : <div>
             {/*<div><img className={s.profileImg} src="https://i.artfile.ru/2560x1440_1526360_[www.ArtFile.ru].jpg"*/}

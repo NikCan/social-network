@@ -35,11 +35,15 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         if (e.code === "Enter") this.deactivateEditMode()
     }
 
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) this.setState({status: this.props.status})
+    }
+
     render() {
         return <>
             <div>
                 {this.state.editMode ?
-                    <input value={this.state.status} onKeyPress={this.onKeyPressHandler} onChange={this.onChangeHandler}
+                    <input value={this.state.status||""} onKeyPress={this.onKeyPressHandler} onChange={this.onChangeHandler}
                            onBlur={this.deactivateEditMode} autoFocus/> :
                     <span onDoubleClick={this.activateEditMode}>{this.props.status || "no status"}</span>}
             </div>
