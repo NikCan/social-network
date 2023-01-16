@@ -75,6 +75,7 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
             return state
     }
 }
+
 export const getUsers = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
