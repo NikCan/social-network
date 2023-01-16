@@ -3,9 +3,8 @@ import {
     addPostActionType,
     profileReducer,
     setUserProfileActionType, setUserStatusActionType,
-    updateNewPostsTextActionType,
 } from "./profile-reducer";
-import {dialogsReducer, sendMessageActionType, updateNewMessageTextActionType} from "./dialogs-reducer";
+import {dialogsReducer, sendMessageActionType} from "./dialogs-reducer";
 import {
     followActionType,
     setCurrentPageActionType, setTotalUsersCountActionType,
@@ -22,8 +21,6 @@ export type stateType = ReturnType<typeof rootReducer>
 
 export type ActionsType =
     addPostActionType
-    | updateNewPostsTextActionType
-    | updateNewMessageTextActionType
     | sendMessageActionType
     | followActionType
     | unfollowActionType

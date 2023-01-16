@@ -1,4 +1,4 @@
-import {addPostActionType, profileReducer, updateNewPostsTextActionType} from "./profile-reducer";
+import {addPostActionType, profileReducer} from "./profile-reducer";
 // import {dialogsReducer, sendMessageActionType, updateNewMessageTextActionType} from "./dialogs-reducer";
 //
 // type dialogsPageType = {
