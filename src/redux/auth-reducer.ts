@@ -1,10 +1,8 @@
-import {ActionsType} from "./redux-store";
-import {Dispatch} from "redux";
-import {authAPI, usersAPI} from "../api/api";
-import {formDataType} from "../components/Login/LoginForm";
+import {ActionsType, AppThunkType} from "./redux-store";
+import {authAPI} from "../api/api";
+import {formRegDataType} from "../components/Login/LoginForm";
 
 export type setAuthUserDataActionType = ReturnType<typeof setAuthUserData>
-export type postAuthUserDataActionType = ReturnType<typeof postAuthUserData>
 
 export type AuthStateType = {
     id: number | null
@@ -12,16 +10,10 @@ export type AuthStateType = {
     email: string | null
     isFetching: boolean
     isAuth: boolean
-    userId: number | null
 }
 
-export const setAuthUserData = (id: number, login: string, email: string) => ({
-    type: 'SET-AUTH-USER-DATA',
-    data: {id, login, email}
-} as const)
-export const postAuthUserData = (userId: number) => ({
-    type: 'POST-AUTH-USER-DATA',
-    userId
+export const setAuthUserData = (id: number|null, login: string|null, email: string|null, isAuth: boolean) => ({
+    type: 'SET-AUTH-USER-DATA', payload: {id, login, email, isAuth}
 } as const)
 
 const initialState: AuthStateType = {
@@ -30,46 +22,40 @@ const initialState: AuthStateType = {
     email: null,
     isFetching: true,
     isAuth: false,
-    userId: null
 }
 
 export const authReducer = (state = initialState, action: ActionsType): AuthStateType => {
     switch (action.type) {
-        case "SET-AUTH-USER-DATA":
-            return {...state, ...action.data, isAuth: true}
-        case "POST-AUTH-USER-DATA":
-            return {...state, userId: action.userId}
+        case "SET-AUTH-USER-DATA": {
+            return {...state, ...action.payload}
+        }
         default:
             return state
     }
 }
 
-export const getMyProfile = () => {
-    return (dispatch: Dispatch) => {
-        authAPI.me().then((data) => {
-            if (data.resultCode === 0) {
-                const {id, login, email} = data.data
-                dispatch(setAuthUserData(id, login, email))
-            }
-        })
-    }
+export const getAuthUserData = (): AppThunkType => (dispatch) => {
+    authAPI.me().then((data) => {
+        if (data.resultCode === 0) {
+            const {id, login, email} = data.data
+            dispatch(setAuthUserData(id, login, email, true))
+        }
+    })
 }
-export type regDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
+
+export const login = (formData: formRegDataType): AppThunkType => (dispatch) => {
+    authAPI.login(formData).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(getAuthUserData())
+        }
+    })
 }
-export const postAuthData = (formData: formDataType) => {
-    const regData: regDataType = {
-        email:formData.login,
-        password: formData.password,
-        rememberMe: formData.rememberMe
-    }
-    return (dispatch: Dispatch) => {
-        authAPI.login(regData).then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(postAuthUserData(data.data.userId))
-            }
-        })
-    }
+
+export const logout = (): AppThunkType => (dispatch) => {
+    authAPI.logout().then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false))
+        }
+    })
 }
+

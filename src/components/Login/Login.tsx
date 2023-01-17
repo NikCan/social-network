@@ -1,15 +1,14 @@
 import React, {ComponentType} from 'react';
-import {formDataType, LoginForm} from "./LoginForm";
+import {formRegDataType, LoginForm} from "./LoginForm";
 import {stateType} from "../../redux/redux-store";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {postAuthData} from "../../redux/auth-reducer";
+import {login} from "../../redux/auth-reducer";
 
 const Login = (props: LoginPropsType) => {
-    const onSubmit = (formData: formDataType) => {
-        props.postAuthData(formData)
+    const onSubmit = (formData: formRegDataType) => {
+        props.login(formData)
     }
-
     return <>
         <h1>Login</h1>
         {props.userId && <div>Hello, {props.userId}!</div>}
@@ -21,17 +20,17 @@ type mapStateToPropsType = {
     userId: number | null
 }
 type mapDispatchToPropsType = {
-    postAuthData: (formData: formDataType) => void
+    login: (formData: formRegDataType) => void
 }
 type LoginPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: stateType): mapStateToPropsType => {
     return {
-        userId: state.auth.userId,
+        userId: state.auth.id,
     }
 }
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {postAuthData}),
+    connect(mapStateToProps, {login}),
     // withAuthRedirect
 )(Login)

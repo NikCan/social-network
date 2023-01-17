@@ -12,7 +12,7 @@ export const AddMessageForm = reduxForm<AddMessageFormPropsType>({form: 'dialogA
     return <form onSubmit={props.handleSubmit}>
         <div>
             <Field component={FormControl} name={"newMessageBody"} placeholder={"Enter your message"}
-                   validate={[required, maxLength15]} typeOfForm={"textarea"}/>
+                   validate={[required, maxLength15]} typeofform={"textarea"}/>
         </div>
         <div>
             <button>Send</button>

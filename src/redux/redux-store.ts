@@ -10,10 +10,10 @@ import {
     setCurrentPageActionType, setTotalUsersCountActionType,
     setUsersActionType, toggleIsFetchingActionType, toggleFollowingProgressActionType,
     unfollowActionType,
-    usersReducer, getUsers
+    usersReducer
 } from "./users-reducer";
-import {authReducer, postAuthUserDataActionType, setAuthUserDataActionType} from "./auth-reducer";
-import thunk from "redux-thunk";
+import {authReducer, setAuthUserDataActionType} from "./auth-reducer";
+import thunk, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
 
 export type storeType = typeof store
@@ -32,7 +32,6 @@ export type ActionsType =
     | setAuthUserDataActionType
     | toggleFollowingProgressActionType
     | setUserStatusActionType
-    | postAuthUserDataActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -43,5 +42,8 @@ const rootReducer = combineReducers({
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, stateType, unknown, ActionsType>
+
+
 //@ts-ignore
 window.store = store

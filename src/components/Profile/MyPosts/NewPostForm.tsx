@@ -12,7 +12,7 @@ export const NewPostForm = reduxForm<newPostPropsType>({form: 'newPost'})
         return <>
             <form onSubmit={props.handleSubmit}>
                 <div><Field placeholder={"it-kamasutra.com"} name={"newPost"} component={FormControl}
-                            validate={[required, maxLength10]} typeOfForm={"textarea"}/></div>
+                            validate={[required, maxLength10]} typeofform={"textarea"}/></div>
                 <div>
                     <button>Add post</button>
                 </div>
