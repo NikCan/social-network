@@ -2,20 +2,6 @@ import {ActionsType, AppThunkType} from "./redux-store";
 import {authAPI} from "../api/api";
 import {formRegDataType} from "../components/Login/LoginForm";
 
-export type setAuthUserDataActionType = ReturnType<typeof setAuthUserData>
-
-export type AuthStateType = {
-    id: number | null
-    login: string | null
-    email: string | null
-    isFetching: boolean
-    isAuth: boolean
-}
-
-export const setAuthUserData = (id: number|null, login: string|null, email: string|null, isAuth: boolean) => ({
-    type: 'SET-AUTH-USER-DATA', payload: {id, login, email, isAuth}
-} as const)
-
 const initialState: AuthStateType = {
     id: null,
     login: null,
@@ -23,7 +9,6 @@ const initialState: AuthStateType = {
     isFetching: true,
     isAuth: false,
 }
-
 export const authReducer = (state = initialState, action: ActionsType): AuthStateType => {
     switch (action.type) {
         case "SET-AUTH-USER-DATA": {
@@ -34,6 +19,12 @@ export const authReducer = (state = initialState, action: ActionsType): AuthStat
     }
 }
 
+// actions
+export const setAuthUserData = (id: number | null, login: string | null, email: string | null, isAuth: boolean) => ({
+    type: 'SET-AUTH-USER-DATA', payload: {id, login, email, isAuth}
+} as const)
+
+// thunks
 export const getAuthUserData = (): AppThunkType => (dispatch) => {
     authAPI.me().then((data) => {
         if (data.resultCode === 0) {
@@ -42,7 +33,6 @@ export const getAuthUserData = (): AppThunkType => (dispatch) => {
         }
     })
 }
-
 export const login = (formData: formRegDataType): AppThunkType => (dispatch) => {
     authAPI.login(formData).then((data) => {
         if (data.resultCode === 0) {
@@ -50,7 +40,6 @@ export const login = (formData: formRegDataType): AppThunkType => (dispatch) => 
         }
     })
 }
-
 export const logout = (): AppThunkType => (dispatch) => {
     authAPI.logout().then((data) => {
         if (data.resultCode === 0) {
@@ -59,3 +48,12 @@ export const logout = (): AppThunkType => (dispatch) => {
     })
 }
 
+// types
+export type setAuthUserDataActionType = ReturnType<typeof setAuthUserData>
+export type AuthStateType = {
+    id: number | null
+    login: string | null
+    email: string | null
+    isFetching: boolean
+    isAuth: boolean
+}

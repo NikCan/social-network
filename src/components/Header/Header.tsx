@@ -6,14 +6,14 @@ type PropsType = {
     children?: ReactNode
     isAuth: boolean
     login: string | null
+    logout: () => void
 }
 
 export function Header(props: PropsType) {
     return <header className={s.header}>
         <img src="https://kachaem-torrent.com/wp-content/uploads/2018/05/Grand-Theft-Auto-5-2-768x142.jpg"/>
         <div className={s.loginBlock}>
-            <NavLink to={'/login'}>our login</NavLink>
-            {props.isAuth ? props.login :
+            {props.isAuth ? <>{props.login}<button onClick={props.logout}>logout</button></> :
                 <NavLink to={'/login'}>login</NavLink>}
         </div>
     </header>

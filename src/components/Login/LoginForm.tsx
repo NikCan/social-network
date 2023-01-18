@@ -15,7 +15,7 @@ export const LoginForm = reduxForm<formRegDataType>({
         return <>
             <form onSubmit={props.handleSubmit}>
                 <div><Field typeofform={"input"} placeholder={"email"} name={"email"} component={FormControl} validate={[required, maxLength30]}/></div>
-                <div><Field typeofform={"input"} placeholder={"password"} name={"password"} component={FormControl} validate={[required, maxLength30]}/></div>
+                <div><Field typeofform={"input"} type={"password"} placeholder={"password"} name={"password"} component={FormControl} validate={[required, maxLength30]}/></div>
                 <div><Field typeofform={"input"} type={"checkbox"} name={"rememberMe"} component={FormControl}/>remember me</div>
                 <div>
                     <button>Login</button>
