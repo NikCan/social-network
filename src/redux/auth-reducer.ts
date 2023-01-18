@@ -1,6 +1,7 @@
 import {ActionsType, AppThunkType} from "./redux-store";
 import {authAPI} from "../api/api";
 import {formRegDataType} from "../components/Login/LoginForm";
+import {stopSubmit} from "redux-form";
 
 const initialState: AuthStateType = {
     id: null,
@@ -37,6 +38,11 @@ export const login = (formData: formRegDataType): AppThunkType => (dispatch) => 
     authAPI.login(formData).then((data) => {
         if (data.resultCode === 0) {
             dispatch(getAuthUserData())
+        } else {
+            dispatch(stopSubmit('login', {
+                email: data.messages.length>0 ? data.messages[0] : "Error",
+                password: data.messages.length>0 ? data.messages[0] : "Error"
+            },))
         }
     })
 }

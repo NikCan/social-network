@@ -14,6 +14,7 @@ type ProfilePropsType = RouteComponentProps<PathParamsType> & PropsType
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
     componentDidMount() {
+        // need to fix
         let userId = +this.props.match.params.userId || this.props.meId || 26918
         this.props.getUser(userId)
         this.props.getStatus(userId)
@@ -22,7 +23,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     render() {
         return <div>
             <Profile profile={this.props.profile} status={this.props.status}
-                     updateStatus={this.props.updateStatus}/>
+                     updateStatus={this.props.updateStatus} isAuth={this.props.isAuth}/>
         </div>
     }
 }
@@ -31,6 +32,7 @@ type mapStateToPropsType = {
     profile: userProfileType
     meId: number | null
     status: string
+    isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -43,7 +45,8 @@ type PropsType = mapStateToPropsType & mapDispatchToPropsType
 const mapStateToProps = (state: stateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
     meId: state.auth.id,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    isAuth: state.auth.isAuth
 })
 
 export default compose<ComponentType>(

@@ -15,6 +15,7 @@ import {
 import {authReducer, setAuthUserDataActionType} from "./auth-reducer";
 import thunk, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
+import {FormAction} from "redux-form/lib/actions";
 
 export type storeType = typeof store
 export type stateType = ReturnType<typeof rootReducer>
@@ -42,7 +43,7 @@ const rootReducer = combineReducers({
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
-export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, stateType, unknown, ActionsType>
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, stateType, unknown, ActionsType | FormAction>
 
 
 //@ts-ignore
