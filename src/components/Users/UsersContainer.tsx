@@ -63,5 +63,5 @@ export default compose<ComponentType>(
     connect(mapStateToProps, {
         getUsers, followThunk, unfollowThunk, setCurrentPage
     }),
-    withAuthRedirect
+    // withAuthRedirect
 )(UsersContainer)

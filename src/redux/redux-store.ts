@@ -16,6 +16,7 @@ import {authReducer, setAuthUserDataActionType} from "./auth-reducer";
 import thunk, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
 import {FormAction} from "redux-form/lib/actions";
+import {appReducer} from "./app-reducer";
 
 export type storeType = typeof store
 export type stateType = ReturnType<typeof rootReducer>
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
+    app: appReducer
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))

@@ -6,7 +6,6 @@ import {stateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 
-
 type PathParamsType = {
     userId: string
 }
@@ -15,9 +14,11 @@ type ProfilePropsType = RouteComponentProps<PathParamsType> & PropsType
 class ProfileContainer extends React.Component<ProfilePropsType> {
     componentDidMount() {
         // need to fix
-        let userId = +this.props.match.params.userId || this.props.meId || 26918
-        this.props.getUser(userId)
-        this.props.getStatus(userId)
+        let userId = +this.props.match.params.userId || this.props.meId
+        if (userId) {
+            this.props.getUser(userId)
+            this.props.getStatus(userId)
+        }
     }
 
     render() {

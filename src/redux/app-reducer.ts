@@ -1,4 +1,5 @@
 import {AppThunkType} from "./redux-store";
+import {getAuthUserData} from "./auth-reducer";
 
 const initialState: InitialStateType = {
     initialized: false
@@ -18,8 +19,10 @@ export const initializedSuccess = (initialized: boolean) => ({
 } as const)
 
 // thunks
-export const initialize = (): AppThunkType => (dispatch) => {
-
+export const initializeApp = (): AppThunkType => (dispatch) => {
+    dispatch(getAuthUserData()).then(()=>{
+        dispatch(initializedSuccess(true))
+    })
 }
 
 // types

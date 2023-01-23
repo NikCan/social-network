@@ -2,6 +2,7 @@ import {ActionsType, AppThunkType} from "./redux-store";
 import {authAPI} from "../api/api";
 import {formRegDataType} from "../components/Login/LoginForm";
 import {stopSubmit} from "redux-form";
+import {resolve, resolveAny} from "dns";
 
 const initialState: AuthStateType = {
     id: null,
@@ -26,8 +27,8 @@ export const setAuthUserData = (id: number | null, login: string | null, email: 
 } as const)
 
 // thunks
-export const getAuthUserData = (): AppThunkType => (dispatch) => {
-    authAPI.me().then((data) => {
+export const getAuthUserData = (): AppThunkType<Promise<any>> => (dispatch) => {
+    return authAPI.me().then((data) => {
         if (data.resultCode === 0) {
             const {id, login, email} = data.data
             dispatch(setAuthUserData(id, login, email, true))
