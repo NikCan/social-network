@@ -18,7 +18,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             {/*          alt=""/>*/}
             {/*</div>*/}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || defaultPhoto} alt="user-photo"/>
+                <img src={props.profile.photos.large || defaultPhoto} alt="user-avatar"/>
                 <ProfileStatusFunc status={props.status} updateStatus={props.updateStatus}/>
                 <h2>{props.profile.fullName}</h2>
                 <div>My contacts: {props.profile.contacts.facebook}</div>

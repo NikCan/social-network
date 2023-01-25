@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 
 type ProfileStatusPropsType = {
     status: string
@@ -8,6 +8,11 @@ type ProfileStatusPropsType = {
 export const ProfileStatusFunc = (props: ProfileStatusPropsType) => {
     const [status, setStatus] = useState<string>(props.status)
     const [editMode, setEditMode] = useState<boolean>(false)
+
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setStatus(e.currentTarget.value)
     const activateEditMode = () => setEditMode(true)
     const deactivateEditMode = () => {
