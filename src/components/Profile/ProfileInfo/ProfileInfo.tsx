@@ -3,7 +3,7 @@ import s from "./ProfileInfo.module.css"
 import {Preloader} from "../../common/Preloader/Preloader";
 import {userProfileType} from "../../../redux/profile-reducer";
 import defaultPhoto from "../../../assets/images/default-profile-photo.jpg"
-import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusFunc} from "./ProfileStatusFunc";
 
 type ProfileInfoPropsType = {
     profile: userProfileType
@@ -19,7 +19,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large || defaultPhoto} alt="user-photo"/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusFunc status={props.status} updateStatus={props.updateStatus}/>
                 <h2>{props.profile.fullName}</h2>
                 <div>My contacts: {props.profile.contacts.facebook}</div>
             </div>
