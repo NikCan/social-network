@@ -5,10 +5,14 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 import {NewPostForm, newPostPropsType} from "./NewPostForm";
 
 export const MyPosts = (props: MyPostsPropsType) => {
-    console.log('posts', props)
     let postsElements = props.posts
-        .map((p, index) => <Post id={p.id} date={p.date} message={p.message}
-                                 likeCount={p.likeCount} key={index}/>)
+        .map((p, index) => {
+            const deletePost = () => {
+                props.deletePost(p.id)
+            }
+            return <Post id={p.id} date={p.date} message={p.message}
+                         likeCount={p.likeCount} key={index} deletePost={deletePost}/>
+        })
 
     const addNewPost = (values: newPostPropsType) => {
         props.addPost(values.newPost)

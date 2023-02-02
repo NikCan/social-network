@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {
-    addPostActionType,
+    addPostActionType, deletePostActionType,
     profileReducer,
     setUserProfileActionType, setUserStatusActionType,
 } from "./profile-reducer";
@@ -34,6 +34,7 @@ export type ActionsType =
     | setAuthUserDataActionType
     | toggleFollowingProgressActionType
     | setUserStatusActionType
+    | deletePostActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,

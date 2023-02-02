@@ -6,6 +6,7 @@ type PostPropsType = {
     date: string
     message: string
     likeCount: number
+    deletePost: () => void
 }
 
 export function Post(props: PostPropsType) {
@@ -13,7 +14,8 @@ export function Post(props: PostPropsType) {
         <div className={s.item}>
             <img
                 src={"https://drasler.ru/wp-content/uploads/2019/05/Скачать-фото-на-аву-с-котами-в-ВК-подборка-аватарок-30.jpg"}/>
-            post {props.id}, {props.date}
+            {props.date}
+            <button onClick={props.deletePost}>x</button>
         </div>
         <div>{props.message}</div>
         <div><span>____{props.likeCount} likes____</span></div>

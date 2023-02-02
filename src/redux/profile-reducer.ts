@@ -4,6 +4,7 @@ import {profileAPI} from "../api/api";
 import {v1} from "uuid";
 
 export type addPostActionType = ReturnType<typeof addPostActionCreator>
+export type deletePostActionType = ReturnType<typeof deletePostAC>
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>
 export type setUserStatusActionType = ReturnType<typeof setUserStatus>
 export type profilePageType = {
@@ -36,6 +37,7 @@ export type PostsType = {
 }
 
 export const addPostActionCreator = (newPost: string) => ({type: 'ADD-POST', newPost} as const)
+export const deletePostAC = (id: string) => ({type: 'DELETE-POST', id} as const)
 export const setUserProfile = (profile: userProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
 export const setUserStatus = (status: string) => ({type: 'SET-USER-STATUS', status} as const)
 
@@ -56,9 +58,15 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
         case "ADD-POST":
             return {
                 ...state, posts: [{
-                    id: v1(), date: "02.11.2022", message: action.newPost, likeCount: 3
+                    id: v1(), date: new Date().toLocaleDateString('ru-RU', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                    }), message: action.newPost, likeCount: 0
                 }, ...state.posts]
             }
+        case 'DELETE-POST':
+            return {...state, posts: state.posts.filter(p => p.id !== action.id)}
         case "SET-USER-PROFILE":
             return {...state, profile: action.profile}
         case "SET-USER-STATUS":

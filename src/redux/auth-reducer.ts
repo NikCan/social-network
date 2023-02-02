@@ -2,7 +2,6 @@ import {ActionsType, AppThunkType} from "./redux-store";
 import {authAPI} from "../api/api";
 import {formRegDataType} from "../components/Login/LoginForm";
 import {stopSubmit} from "redux-form";
-import {resolve, resolveAny} from "dns";
 
 const initialState: AuthStateType = {
     id: null,
