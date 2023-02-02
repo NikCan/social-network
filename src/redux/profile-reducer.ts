@@ -3,44 +3,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 import {v1} from "uuid";
 
-export type addPostActionType = ReturnType<typeof addPostActionCreator>
-export type deletePostActionType = ReturnType<typeof deletePostAC>
-export type setUserProfileActionType = ReturnType<typeof setUserProfile>
-export type setUserStatusActionType = ReturnType<typeof setUserStatus>
-export type profilePageType = {
-    posts: Array<PostsType>
-    profile: userProfileType
-    status: string
-}
-export type userProfileType = null | {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
-    photos: {
-        small: string
-        large: string
-    }
-}
-export type PostsType = {
-    id: string, date: string, message: string, likeCount: number
-}
-
-export const addPostActionCreator = (newPost: string) => ({type: 'ADD-POST', newPost} as const)
-export const deletePostAC = (id: string) => ({type: 'DELETE-POST', id} as const)
-export const setUserProfile = (profile: userProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
-export const setUserStatus = (status: string) => ({type: 'SET-USER-STATUS', status} as const)
-
 const initialState: profilePageType = {
     posts: [
         {id: "1", date: "17.10.2022", message: "HI", likeCount: 2},
@@ -76,26 +38,57 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
     }
 }
 
-export const getUser = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.getProfile(userId).then(data => {
-            dispatch(setUserProfile(data))
-        })
-    }
+// actions
+export const addPostActionCreator = (newPost: string) => ({type: 'ADD-POST', newPost} as const)
+export const deletePostAC = (id: string) => ({type: 'DELETE-POST', id} as const)
+export const setUserProfile = (profile: userProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
+export const setUserStatus = (status: string) => ({type: 'SET-USER-STATUS', status} as const)
+
+// thunks
+export const getUser = (userId: number) => async (dispatch: Dispatch) => {
+    const data = await profileAPI.getProfile(userId)
+    dispatch(setUserProfile(data))
 }
-export const getStatus = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.getStatus(userId).then(data => {
-            dispatch(setUserStatus(data))
-        })
-    }
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+    const data = await profileAPI.getStatus(userId)
+    dispatch(setUserStatus(data))
+}
+export const updateStatus = (newStatus: string) => async (dispatch: Dispatch) => {
+    const data = await profileAPI.updateStatus(newStatus)
+    if (data.resultCode === 0)
+        dispatch(setUserStatus(newStatus))
 }
 
-export const updateStatus = (newStatus: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.updateStatus(newStatus).then(data => {
-            if (data.resultCode === 0)
-                dispatch(setUserStatus(newStatus))
-        })
+// types
+export type addPostActionType = ReturnType<typeof addPostActionCreator>
+export type deletePostActionType = ReturnType<typeof deletePostAC>
+export type setUserProfileActionType = ReturnType<typeof setUserProfile>
+export type setUserStatusActionType = ReturnType<typeof setUserStatus>
+export type profilePageType = {
+    posts: Array<PostsType>
+    profile: userProfileType
+    status: string
+}
+export type userProfileType = null | {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
     }
+    photos: {
+        small: string
+        large: string
+    }
+}
+export type PostsType = {
+    id: string, date: string, message: string, likeCount: number
 }
