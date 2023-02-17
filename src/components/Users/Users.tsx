@@ -1,8 +1,6 @@
 import React from "react";
 import s from "./Users.module.css"
-import userAvatar from "../../assets/images/avatar.png"
 import {userType} from "../../redux/users-reducer";
-import {NavLink} from "react-router-dom";
 import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User/User";
 
@@ -16,13 +14,28 @@ type PropsType = {
     followThunk: (id: number) => void
     unfollowThunk: (id: number) => void
 }
-export const Users = (props: PropsType) => {
+export const Users = ({
+                          users,
+                          followingInProgress,
+                          followThunk,
+                          unfollowThunk,
+                          totalUsersCount,
+                          pageSize,
+                          onPageChanged,
+                          currentPage
+                      }: PropsType) => {
+
     return <div className={s.usersBlock}>
-        <Paginator totalUsersCount={props.totalUsersCount} onPageChanged={props.onPageChanged}
-                   currentPage={props.currentPage} pageSize={props.pageSize}/>
-        {props.users.map(el =>
-            <User user={el} followingInProgress={props.followingInProgress} followThunk={() => props.followThunk(el.id)}
-                  unfollowThunk={() => props.unfollowThunk(el.id)} key={el.id}/>
+        <Paginator totalUsersCount={totalUsersCount}
+                   onPageChanged={onPageChanged}
+                   currentPage={currentPage}
+                   pageSize={pageSize}/>
+        {users.map(user =>
+            <User user={user}
+                  followingInProgress={followingInProgress}
+                  followThunk={() => followThunk(user.id)}
+                  unfollowThunk={() => unfollowThunk(user.id)}
+                  key={user.id}/>
         )}
     </div>
 }

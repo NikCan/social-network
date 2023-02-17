@@ -12,9 +12,11 @@ type PropsType = {
     isAuth: boolean
 }
 
-export function Profile(props: PropsType) {
-    return !props.isAuth ? <Redirect to={"/login"}/> : <div>
-        <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+export function Profile({profile, status, updateStatus, isAuth, children}: PropsType) {
+    return !isAuth ? <Redirect to={"/login"}/> : <div>
+        <ProfileInfo profile={profile}
+                     status={status}
+                     updateStatus={updateStatus}/>
         <MyPostsContainer/>
     </div>
 }

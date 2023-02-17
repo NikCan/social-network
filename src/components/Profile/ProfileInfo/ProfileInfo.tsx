@@ -11,17 +11,17 @@ type ProfileInfoPropsType = {
     status: string
 }
 
-export function ProfileInfo(props: ProfileInfoPropsType) {
-    return !props.profile ? <Preloader/>
+export function ProfileInfo({profile, status, updateStatus}: ProfileInfoPropsType) {
+    return !profile ? <Preloader/>
         : <div>
             {/*<div><img className={s.profileImg} src="https://i.artfile.ru/2560x1440_1526360_[www.ArtFile.ru].jpg"*/}
             {/*          alt=""/>*/}
             {/*</div>*/}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || defaultPhoto} alt="user-avatar"/>
-                <ProfileStatusFunc status={props.status} updateStatus={props.updateStatus}/>
-                <h2>{props.profile.fullName}</h2>
-                <div>My contacts: {props.profile.contacts.facebook}</div>
+                <img src={profile.photos.large || defaultPhoto} alt="user-avatar"/>
+                <ProfileStatusFunc status={status} updateStatus={updateStatus}/>
+                <h2>{profile.fullName}</h2>
+                <div>My contacts: {profile.contacts.facebook}</div>
             </div>
         </div>
 }
