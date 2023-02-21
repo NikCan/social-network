@@ -20,9 +20,6 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
       this.props.getStatus(userId)
     }
   }
-componentDidUpdate(prevProps: Readonly<ProfilePropsType>, prevState: Readonly<{}>, snapshot?: any) {
-
-}
 
   render() {
     return <div>

@@ -7,7 +7,7 @@ import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {stateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {withAuthRedirect} from "../../hocs/withAuthRedirect";
 
 type mapStateToPropsType = {
     dialogsPage: dialogsPageType
