@@ -1,1 +1,1 @@
-Hi everyone! This is a project of a social network based on Dimych Kuzyuberdin
+Hi everyone! This is my pilot project of a social network based on Dimych Kuzyuberdin
