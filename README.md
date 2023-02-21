@@ -1,1 +1,1 @@
-Всем привет! Это проект социальной сети по мотивам Димыча
+Hi everyone! This is a project of a social network based on Dimych Kuzyuberdin

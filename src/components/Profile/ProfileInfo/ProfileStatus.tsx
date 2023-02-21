@@ -1,6 +1,6 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 
-type ProfileStatusPropsType = {
+export type ProfileStatusPropsType = {
     status: string
     updateStatus: (newStatus: string) => void
 }
