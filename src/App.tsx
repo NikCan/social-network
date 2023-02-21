@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
@@ -57,10 +57,10 @@ const mapStateToProps = (state: stateType): mapStateToPropsType => ({
 const AppContainer = connect(mapStateToProps, {initializeApp})(App)
 
 const MainApp = () => {
-  return <BrowserRouter basename={process.env.PUBLIC_URL}>
+  return <HashRouter>
     <Provider store={store}>
       <AppContainer/>
     </Provider>
-  </BrowserRouter>
+  </HashRouter>
 }
 export default MainApp
