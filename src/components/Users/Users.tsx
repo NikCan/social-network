@@ -26,7 +26,7 @@ export const Users = ({
                       }: PropsType) => {
 
     return <div className={s.usersBlock}>
-        <Paginator totalUsersCount={totalUsersCount}
+        <Paginator totalItemsCount={totalUsersCount}
                    onPageChanged={onPageChanged}
                    currentPage={currentPage}
                    pageSize={pageSize}/>
