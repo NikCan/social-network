@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {BrowserRouter, HashRouter, Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
@@ -31,6 +31,7 @@ class App extends React.Component<PropsType> {
         <Navbar/>
         <div className='app-wrapper-content'>
           <Route path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
+          <Route exact path={"/"} render={() => <ProfileContainer/>}/>
           <Route path="/dialogs"
                  render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/></Suspense>}/>
           <Route path={"/news"} render={() => <News/>}/>

@@ -1,8 +1,8 @@
 import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUser, updateStatus, userProfileType} from "../../redux/profile-reducer";
-import {stateType} from "../../redux/redux-store";
+import {getStatus, getUser, updateStatus, userProfileType} from "redux/profile-reducer";
+import {stateType} from "redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 
@@ -12,13 +12,20 @@ type PathParamsType = {
 type ProfilePropsType = RouteComponentProps<PathParamsType> & PropsType
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
-  componentDidMount() {
-    // need to fix
+  refreshProfile() {
     let userId = +this.props.match.params.userId || this.props.meId
     if (userId) {
       this.props.getUser(userId)
       this.props.getStatus(userId)
     }
+  }
+
+  componentDidMount() {
+    this.refreshProfile()
+  }
+
+  componentDidUpdate(prevProps: Readonly<ProfilePropsType>, prevState: Readonly<{}>, snapshot?: any) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) this.refreshProfile()
   }
 
   render() {
