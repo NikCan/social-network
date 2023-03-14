@@ -5,7 +5,7 @@ import {
 } from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {stateType} from "../../redux/redux-store";
+import {stateType} from "../../redux/store";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hocs/withAuthRedirect";
 

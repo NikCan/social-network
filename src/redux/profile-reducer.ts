@@ -1,7 +1,10 @@
-import {ActionsType} from "./redux-store";
+import {ActionsType, AppThunkType} from "./store";
 import {Dispatch} from "redux";
-import {profileAPI} from "../api/api";
+import {profileAPI} from "api/api";
 import {v1} from "uuid";
+import {FormProfileDataType} from "components/Profile/ProfileInfo/ProfileData/ProfileDataForm";
+import {stopSubmit} from "redux-form";
+import {findContactsInError} from "utils/helpers/findContactsInError";
 
 const initialState: profilePageType = {
   posts: [
@@ -34,7 +37,8 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
     case "profile/SET-USER-STATUS":
       return {...state, status: action.status}
     case "profile/SAVE-PHOTO-SUCCESS":
-      return {...state, profile: {...state.profile, photos: action.photos}}
+      if (state.profile) return {...state, profile: {...state.profile, photos: action.photos}}
+      else return {...state}
     default:
       return state
   }
@@ -43,7 +47,7 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
 // actions
 export const addPostActionCreator = (newPost: string) => ({type: 'profile/ADD-POST', newPost} as const)
 export const deletePostAC = (id: string) => ({type: 'profile/DELETE-POST', id} as const)
-export const setUserProfile = (profile: userProfileType) => ({type: 'profile/SET-USER-PROFILE', profile} as const)
+export const setUserProfile = (profile: UserProfileType) => ({type: 'profile/SET-USER-PROFILE', profile} as const)
 export const setUserStatus = (status: string) => ({type: 'profile/SET-USER-STATUS', status} as const)
 export const savePhotoSuccess = (photos: PhotosType) => ({type: 'profile/SAVE-PHOTO-SUCCESS', photos} as const)
 
@@ -64,39 +68,47 @@ export const updateStatus = (newStatus: string) => async (dispatch: Dispatch) =>
 
 export const savePhoto = (formData: FormData) => async (dispatch: Dispatch) => {
   const data = await profileAPI.savePhoto(formData)
-  if (data.resultCode === 0)
-    dispatch(savePhotoSuccess(data.data.photos))
+  if (data.resultCode === 0) dispatch(savePhotoSuccess(data.data.photos))
+}
+
+export const updateProfile = (formData: FormProfileDataType): AppThunkType => async (dispatch, getState) => {
+  const data = await profileAPI.updateProfile(formData)
+  if (data.resultCode === 0) await dispatch(getUser(getState().auth.id || 26918))
+  else {
+    const field = findContactsInError(data.messages[0]) === 'mainlink' ? 'mainLink' : findContactsInError(data.messages[0]) as string
+    dispatch(stopSubmit('profileDataForm', {'contacts': {[field]: data.messages[0]}}))
+    return Promise.reject()
+  }
 }
 // types
-export type addPostActionType = ReturnType<typeof addPostActionCreator>
-export type deletePostActionType = ReturnType<typeof deletePostAC>
-export type setUserProfileActionType = ReturnType<typeof setUserProfile>
-export type setUserStatusActionType = ReturnType<typeof setUserStatus>
-export type savePhotoSuccessActionType = ReturnType<typeof savePhotoSuccess>
 export type profilePageType = {
   posts: Array<PostsType>
-  profile: userProfileType
+  profile: UserProfileType
   status: string
 }
-export type userProfileType = null | {
-  userId: number
-  lookingForAJob: boolean
-  lookingForAJobDescription: string
-  fullName: string
-  contacts: {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-  }
-  photos: PhotosType
-}
+
 export type PostsType = {
   id: string, date: string, message: string, likeCount: number
+}
+
+export type UserProfileType = null | {
+  aboutMe?: any;
+  contacts: ContactsType;
+  lookingForAJob: boolean;
+  lookingForAJobDescription?: any;
+  fullName: string;
+  userId: number;
+  photos: PhotosType;
+}
+export type ContactsType = {
+  facebook: string;
+  website: string;
+  vk: string;
+  twitter: string;
+  instagram: string;
+  youtube: string;
+  github: string;
+  mainLink: string;
 }
 
 type PhotosType = {

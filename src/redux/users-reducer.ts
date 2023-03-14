@@ -1,4 +1,4 @@
-import {ActionsType} from "./redux-store";
+import {ActionsType} from "./store";
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 

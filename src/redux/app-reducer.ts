@@ -1,4 +1,4 @@
-import {AppThunkType} from "./redux-store";
+import {AppThunkType} from "./store";
 import {getAuthUserData} from "./auth-reducer";
 
 const initialState: AppInitialStateType = {

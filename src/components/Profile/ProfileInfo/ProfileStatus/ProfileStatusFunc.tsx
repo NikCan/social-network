@@ -29,7 +29,7 @@ export const ProfileStatusFunc = (props: ProfileStatusPropsType) => {
         ? <input value={status || ""} onKeyPress={onKeyPressHandler}
                  onChange={onChangeHandler}
                  onBlur={deactivateEditMode} autoFocus/>
-        : <span onDoubleClick={activateEditMode}>{props.status || "no status"}</span>}
+        : <span onDoubleClick={activateEditMode}><b>{props.status || "no status"}</b></span>}
     </div>
   </>
 }

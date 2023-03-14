@@ -1,6 +1,6 @@
 import React, {ComponentType} from "react";
 import {connect} from "react-redux";
-import {stateType} from "../../redux/redux-store";
+import {stateType} from "../../redux/store";
 import {
     followThunk, requestUsers, setCurrentPage, unfollowThunk, userType
 } from "../../redux/users-reducer";

@@ -1,5 +1,6 @@
 import axios from "axios";
 import {formRegDataType} from "components/Login/LoginForm";
+import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileData/ProfileDataForm";
 
 const instance = axios.create({
   withCredentials: true,
@@ -39,6 +40,10 @@ export const profileAPI = {
   },
   savePhoto(formData: FormData) {
     return instance.put(`profile/photo`, formData)
+      .then(res => res.data)
+  },
+  updateProfile(formData: FormProfileDataType) {
+    return instance.put(`profile`, formData)
       .then(res => res.data)
   },
 }

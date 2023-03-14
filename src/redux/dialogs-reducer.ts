@@ -1,4 +1,4 @@
-import {ActionsType} from "./redux-store";
+import {ActionsType} from "./store";
 import {v1} from "uuid";
 
 export type sendMessageActionType = ReturnType<typeof sendMessageActionCreator>

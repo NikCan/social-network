@@ -1,6 +1,6 @@
 import React, {ComponentType} from 'react';
 import {formRegDataType, LoginForm} from "./LoginForm";
-import {stateType} from "../../redux/redux-store";
+import {stateType} from "../../redux/store";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
