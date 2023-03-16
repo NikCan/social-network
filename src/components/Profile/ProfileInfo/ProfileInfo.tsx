@@ -38,7 +38,7 @@ export function ProfileInfo({profile, status, updateStatus, isOwner, savePhoto, 
         {isOwner && <div><input type="file" onChange={(e) => onChangeHandler(e)}/></div>}
         <ProfileStatusFunc status={status} updateStatus={updateStatus}/>
         {editMode
-          ? <ProfileDataForm initialValues={profile} onSubmit={saveDataHandler}/>
+          ? <ProfileDataForm initialValues={profile} contacts={profile.contacts} onSubmit={saveDataHandler}/>
           : <ProfileData isOwner={isOwner} profile={profile} goToEditMode={() => setEditMode(true)}/>}
       </div>
     </div>

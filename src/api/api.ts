@@ -1,6 +1,6 @@
 import axios from "axios";
 import {formRegDataType} from "components/Login/LoginForm";
-import {FormProfileDataType} from "../components/Profile/ProfileInfo/ProfileData/ProfileDataForm";
+import {FormProfileDataType} from "components/Profile/ProfileInfo/ProfileData/ProfileDataForm";
 
 const instance = axios.create({
   withCredentials: true,
@@ -59,6 +59,13 @@ export const authAPI = {
   },
   logout() {
     return instance.delete('auth/login')
+      .then(res => res.data)
+  }
+}
+
+export const securityAPI = {
+  getCaptchaUrl() {
+    return instance.get('security/get-captcha-url')
       .then(res => res.data)
   }
 }

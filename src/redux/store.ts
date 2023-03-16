@@ -18,7 +18,7 @@ import {
   unfollowActionType,
   usersReducer
 } from "./users-reducer";
-import {authReducer, setAuthUserDataActionType} from "./auth-reducer";
+import {authReducer, getCaptchaUrlSuccess, setAuthUserDataActionType} from "./auth-reducer";
 import thunk, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
 import {FormAction} from "redux-form/lib/actions";
@@ -42,6 +42,7 @@ export type ActionsType =
   | ReturnType<typeof deletePostAC>
   | ReturnType<typeof addPostActionCreator>
   | ReturnType<typeof savePhotoSuccess>
+  | ReturnType<typeof getCaptchaUrlSuccess>
 
 const rootReducer = combineReducers({
   profilePage: profileReducer,
