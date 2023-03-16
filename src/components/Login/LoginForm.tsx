@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {FormControl} from "components/common/FormsControls/FormsControls";
+import {FormControl} from "components/common";
 import {maxLengthCreator, required} from "utils/validators/validator";
 
 export type formRegDataType = {

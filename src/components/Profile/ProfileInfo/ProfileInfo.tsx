@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import s from "./ProfileInfo.module.css"
-import {Preloader} from "components/common/Preloader/Preloader";
+import {Preloader} from "components/common";
 import {UserProfileType} from "redux/profile-reducer";
 import defaultPhoto from "assets/images/default-profile-photo.jpg"
 import {ProfileData} from "./ProfileData/ProfileData";
