@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import './App.css';
+import s from './App.module.css';
 import {HeaderContainer, Login, Music, Navbar, News, Settings} from "./components";
 import {ProfileContainer} from "./components/Profile";
 import {UsersContainer} from "./components/Users";
@@ -30,10 +30,10 @@ class App extends React.Component<PropsType> {
 
   render() {
     return !this.props.initialized ? <Preloader/> : (
-      <div className='app-wrapper'>
+      <div className={s.appWrapper}>
         <HeaderContainer/>
         <Navbar/>
-        <div className='app-wrapper-content'>
+        <div className={s.appWrapperContent}>
           <Switch>
             <Route path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
             <Route exact path={"/"} render={() => <Redirect to={'/profile'}/>}/>

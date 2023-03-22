@@ -1,6 +1,25 @@
 .descriptionBlock {
-    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 50px;
+    width: 100%;
+    max-width: 900px;
 }
+
 .contacts {
     padding-left: 10px;
+}
+
+.button {
+    height: 50px;
+    width: 100px;
+    background-color: #43cb83;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.button:active {
+    opacity: .5;
 }

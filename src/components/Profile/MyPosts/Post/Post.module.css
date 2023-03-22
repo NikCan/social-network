@@ -1,5 +1,13 @@
+.post {
+    display: flex;
+    flex-direction: column;
+}
+
 .item {
+    display: flex;
     color: green;
+    justify-content: space-between;
+    align-items: center;
 }
 .item img {
     width: 60px;

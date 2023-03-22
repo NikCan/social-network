@@ -23,13 +23,11 @@ export const ProfileStatusFunc = (props: ProfileStatusPropsType) => {
     if (e.code === "Enter") deactivateEditMode()
   }
 
-  return <>
-    <div>
-      {editMode
-        ? <input value={status || ""} onKeyPress={onKeyPressHandler}
-                 onChange={onChangeHandler}
-                 onBlur={deactivateEditMode} autoFocus/>
-        : <span onDoubleClick={activateEditMode}><b>{props.status || "no status"}</b></span>}
-    </div>
-  </>
+  return <div style={{paddingTop:'10px'}}>
+    {editMode
+      ? <input value={status || ""} onKeyPress={onKeyPressHandler}
+               onChange={onChangeHandler}
+               onBlur={deactivateEditMode} autoFocus/>
+      : <span onDoubleClick={activateEditMode}><b>{props.status || "no status"}</b></span>}
+  </div>
 }

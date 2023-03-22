@@ -4,29 +4,30 @@ import {Post} from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
 import {NewPostForm, newPostPropsType} from "./NewPostForm";
 
-export const MyPosts = (props: MyPostsPropsType) => {
-    let postsElements = props.posts
-        .map((p, index) => {
-            const deletePost = () => {
-                props.deletePost(p.id)
-            }
-            return <Post id={p.id} date={p.date} message={p.message}
-                         likeCount={p.likeCount} key={index} deletePost={deletePost}/>
-        })
+export const MyPosts = ({posts, deletePost, addPost, profile}: MyPostsPropsType) => {
 
-    const addNewPost = (values: newPostPropsType) => {
-        props.addPost(values.newPost)
-    }
+  const postsElements = posts
+    .map((p, index) => <Post
+      key={index}
+      profile={profile}
+      id={p.id}
+      date={p.date}
+      message={p.message}
+      likeCount={p.likeCount}
+      deletePost={() => deletePost(p.id)}
+    />)
 
-    return <div className={s.postsBlock}>
-        <h2>My posts</h2>
-        <div className={s.item}>
-            <div>
-                <NewPostForm onSubmit={addNewPost}/>
-            </div>
-        </div>
-        <div className={s.posts}>
-            {postsElements}
-        </div>
+  const addNewPost = (values: newPostPropsType) => {
+    addPost(values.newPost)
+  }
+
+  return <div className={s.postsBlock}>
+    <h2>My posts</h2>
+    <div className={s.item}>
+      <NewPostForm onSubmit={addNewPost}/>
     </div>
+    <div className={s.posts}>
+      {postsElements}
+    </div>
+  </div>
 };

@@ -5,5 +5,5 @@ type PropsType = {
   value: string
 }
 export const Contact = ({value, title}: PropsType) => {
-  return <div><b>{title}: </b>{value || 'absent'}</div>
+  return <div style={{padding: '5px'}}><b>{title}: </b>{value || 'absent'}</div>
 }

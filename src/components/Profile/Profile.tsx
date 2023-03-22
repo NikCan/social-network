@@ -4,6 +4,8 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {UserProfileType} from "redux/profile-reducer";
 import {Redirect} from "react-router-dom";
 import {FormProfileDataType} from "./ProfileInfo/ProfileData/ProfileDataForm";
+import s from './Profile.module.css'
+import {Separator} from "../common/Separator/Separator";
 
 type PropsType = {
   profile: UserProfileType
@@ -16,16 +18,24 @@ type PropsType = {
   updateProfile: (formData: FormProfileDataType) => Promise<string>
 }
 
-export function Profile({profile, status, updateStatus, isAuth, isOwner, savePhoto, updateProfile}: PropsType) {
-  return !isAuth ? <Redirect to={"/login"}/> : <div>
-    <ProfileInfo
-      updateProfile={updateProfile}
-      savePhoto={savePhoto}
-      isOwner={isOwner}
-      profile={profile}
-      status={status}
-      updateStatus={updateStatus}
-    />
-    <MyPostsContainer/>
-  </div>
+export const Profile = ({profile, status, updateStatus, isAuth, isOwner, savePhoto, updateProfile}: PropsType) => {
+  return (
+    !isAuth
+      ? <Redirect to={"/login"}/>
+      : <>
+        <Separator title={'Profile'}/>
+        <div className={s.profileContainer}>
+          <ProfileInfo
+            updateProfile={updateProfile}
+            savePhoto={savePhoto}
+            isOwner={isOwner}
+            profile={profile}
+            status={status}
+            updateStatus={updateStatus}
+          />
+          <MyPostsContainer/>
+        </div>
+      </>
+
+  )
 }

@@ -7,13 +7,7 @@ import {stopSubmit} from "redux-form";
 import {findContactsInError} from "utils/helpers/findContactsInError";
 
 const initialState: profilePageType = {
-  posts: [
-    {id: "1", date: "17.10.2022", message: "HI", likeCount: 2},
-    {id: "2", date: "18.10.2022", message: "How are you?", likeCount: 5},
-    {id: "3", date: "18.10.2022", message: "I'm Nikita", likeCount: 76},
-    {id: "4", date: "18.10.2022", message: "I'm 32", likeCount: 4},
-    {id: "5", date: "18.10.2022", message: "I'm from Russia", likeCount: 0},
-  ],
+  posts: [],
   profile: null,
   status: ""
 }

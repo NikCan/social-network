@@ -1,18 +1,29 @@
 .header {
-    grid-area: h;
-    background-color: green;
-}
-
-.header img {
-    height: 60px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: #323232;
+    color: #cacaca;
 }
 
 .loginBlock {
-    float: right;
-    margin-right: 50px;
-    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    max-width: 800px;
+    /*border: 1px solid white;*/
 }
 
-.loginBlock a {
+.loginButton {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 50px;
+}
+
+.loginButton a {
     color: white;
 }

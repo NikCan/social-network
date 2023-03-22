@@ -27,19 +27,24 @@ export function ProfileInfo({profile, status, updateStatus, isOwner, savePhoto, 
     }
   }
   const saveDataHandler = (formData: FormProfileDataType) => {
-    updateProfile(formData).then(()=>{
+    updateProfile(formData).then(() => {
       setEditMode(false)
     })
   }
   return !profile ? <Preloader/>
-    : <div>
+    : <>
       <div className={s.descriptionBlock}>
-        <img src={profile.photos.large || defaultPhoto} alt="user-avatar"/>
-        {isOwner && <div><input type="file" onChange={(e) => onChangeHandler(e)}/></div>}
-        <ProfileStatusFunc status={status} updateStatus={updateStatus}/>
-        {editMode
-          ? <ProfileDataForm initialValues={profile} contacts={profile.contacts} onSubmit={saveDataHandler}/>
-          : <ProfileData isOwner={isOwner} profile={profile} goToEditMode={() => setEditMode(true)}/>}
+        <div>
+          <img src={profile.photos.large || defaultPhoto} alt="user-avatar"/>
+          {isOwner && <div><input type="file" onChange={(e) => onChangeHandler(e)}/></div>}
+          <ProfileStatusFunc status={status} updateStatus={updateStatus}/>
+        </div>
+        <div>
+          {editMode
+            ? <ProfileDataForm initialValues={profile} contacts={profile.contacts} onSubmit={saveDataHandler}/>
+            : <ProfileData isOwner={isOwner} profile={profile} goToEditMode={() => setEditMode(true)}/>}
+        </div>
+
       </div>
-    </div>
+    </>
 }

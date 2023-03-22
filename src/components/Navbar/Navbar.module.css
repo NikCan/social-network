@@ -1,14 +1,32 @@
 .nav {
-    grid-area: n;
-    background-color: cornflowerblue;
-    padding: 20px;
-    font-size: x-large;
-    padding-left: 20px;
+    display: flex;
+    height: 90px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    /*border: 1px solid black;*/
+}
+
 .item a {
-    color: white;
+    color: #838383;
+    text-transform: uppercase;
     text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
 }
-.item a.activeLink  {
-    color: gold;
+
+.item a:hover {
+    color: #43cb83;
+
+}
+
+.item a.activeLink {
+    color: #43cb83;
 }
