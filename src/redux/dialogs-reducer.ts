@@ -1,22 +1,16 @@
 import {ActionsType} from "./store";
 import {v1} from "uuid";
 
-export const sendMessageActionCreator = (newMessage: string, name: string) => ({
-  type: 'SEND-MESSAGE',
-  newMessage,
-  name
-} as const)
-
 const initialState: dialogsPageType = {
   messages: [
-    {id: "1", text: "Hello"},
-    {id: "2", text: "How are you?"},
-    {id: "3", text: "Good bye"},
+    {id: v1(), text: "Hello"},
+    {id: v1(), text: "How are you?"},
+    {id: v1(), text: "Good bye"},
   ],
   dialogs: [
-    {id: "1", name: "Nikita"},
-    {id: "2", name: "Dasha"},
-    {id: "3", name: "Asya"},
+    {id: v1(), name: "Nikita"},
+    {id: v1(), name: "Dasha"},
+    {id: v1(), name: "Asya"},
   ],
 }
 
@@ -32,6 +26,14 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: Ac
       return state
   }
 }
+
+// actions
+export const sendMessageActionCreator = (newMessage: string, name: string) => ({
+  type: 'SEND-MESSAGE',
+  newMessage,
+  name
+} as const)
+
 
 // types
 export type sendMessageActionType = ReturnType<typeof sendMessageActionCreator>

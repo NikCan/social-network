@@ -3,11 +3,10 @@ import {NavLink} from "react-router-dom";
 
 type DialogItemPropsType = {
     name: string
-    id: string
 }
 
-export const DialogItem = (props: DialogItemPropsType) => {
+export const DialogItem = ({name}: DialogItemPropsType) => {
     return <div>
-        <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
+        <NavLink to={"/dialogs/" + name}>{name}</NavLink>
     </div>
 }

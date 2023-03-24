@@ -21,7 +21,7 @@ export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 const mapStateToProps = (state: stateType): mapStateToPropsType => {
   return {
     dialogsPage: state.dialogsPage,
-    name: state.profilePage.profile?.fullName as string
+    name: state.auth.login as string
   }
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {

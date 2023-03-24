@@ -1,6 +1,6 @@
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import React from "react";
-import {FormControl} from "components/common/FormsControls/FormsControls";
+import React, {FormEvent} from "react";
+import {FormControl} from "components/common";
 import s from '../Profile/ProfileInfo/ProfileInfo.module.css'
 
 export type AddMessageFormPropsType = {
@@ -8,7 +8,8 @@ export type AddMessageFormPropsType = {
 }
 export const AddMessageForm = reduxForm<AddMessageFormPropsType>({form: 'dialogAddMessageForm'})
 (({reset, handleSubmit}: InjectedFormProps<AddMessageFormPropsType>) => {
-  const submitHandler = () => {
+  const submitHandler = (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     reset()
     // @ts-ignore
     handleSubmit()

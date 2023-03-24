@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FormControl} from "../../common";
 import s from '../ProfileInfo/ProfileInfo.module.css'
@@ -7,11 +7,12 @@ export type newPostPropsType = {
   newPost: string
 }
 export const NewPostForm = reduxForm<newPostPropsType>({form: 'newPost'})
-((props: InjectedFormProps<newPostPropsType>) => {
-    const submitHandler = () => {
-      props.reset()
+(({handleSubmit,reset}: InjectedFormProps<newPostPropsType>) => {
+    const submitHandler = (e:FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      reset()
       // @ts-ignore
-      props.handleSubmit()
+      handleSubmit()
     }
     return <>
       <form onSubmit={submitHandler}>
