@@ -19,7 +19,7 @@ export const NewPostForm = reduxForm<newPostPropsType>({form: 'newPost'})
         <div><Field style={{width: '300px', height: '100px'}} placeholder={"type your post"} name={"newPost"}
                     component={FormControl} typeofform={"textarea"}/></div>
         <div>
-          <button className={s.button}>Add post</button>
+          <button style={{marginTop: '14px'}} className={s.button}>Add post</button>
         </div>
       </form>
     </>

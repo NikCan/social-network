@@ -55,7 +55,7 @@ export const ProfileDataForm = reduxForm<FormProfileDataType, PropsType>({form: 
             })
           }
         </div>
-        <div>
+        <div style={{marginTop: '16px'}}>
           <button className={s.button}>save</button>
         </div>
       </form>

@@ -23,11 +23,11 @@ export const MyPosts = ({posts, deletePost, addPost, profile}: MyPostsPropsType)
 
   return <div className={s.postsBlock}>
     <h2>My posts</h2>
-    <div className={s.item}>
-      <NewPostForm onSubmit={addNewPost}/>
-    </div>
     <div className={s.posts}>
       {postsElements}
+    </div>
+    <div className={s.item}>
+      <NewPostForm onSubmit={addNewPost}/>
     </div>
   </div>
 };
