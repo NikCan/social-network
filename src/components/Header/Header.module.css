@@ -20,6 +20,7 @@
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    max-width: 850px;
     padding-right: 50px;
 }
 
