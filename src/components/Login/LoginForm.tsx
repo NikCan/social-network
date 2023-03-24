@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FormControl} from "components/common";
 import {maxLengthCreator, required} from "utils/validators/validator";
+import s from '../Profile/ProfileInfo/ProfileInfo.module.css'
 
 export type formRegDataType = {
   email: string
@@ -16,22 +17,30 @@ const maxLength30 = maxLengthCreator(30)
 export const LoginForm = reduxForm<formRegDataType, PropsType>({
   form: 'login'
 })(({handleSubmit, error, captchaUrl}: PropsType & InjectedFormProps<formRegDataType, PropsType>) => {
-    return <>
+    return <div>
       <form onSubmit={handleSubmit}>
-        <div><Field typeofform={"input"} placeholder={"email"} name={"email"} component={FormControl}
+        <div><Field style={{width: '300px', marginBottom: '16px'}} typeofform={"input"} placeholder={"email"}
+                    name={"email"}
+                    component={FormControl}
                     validate={[required, maxLength30]}/></div>
-        <div><Field typeofform={"input"} type={"password"} placeholder={"password"} name={"password"}
+        <div><Field style={{width: '300px', marginBottom: '16px'}} typeofform={"input"} type={"password"}
+                    placeholder={"password"}
+                    name={"password"}
                     component={FormControl} validate={[required, maxLength30]}/></div>
-        <div><Field typeofform={"input"} type={"checkbox"} name={"rememberMe"} component={FormControl}/>remember me</div>
+        <div style={{display: 'flex', marginBottom: '16px'}}><Field typeofform={"input"} type={"checkbox"}
+                                                                    name={"rememberMe"}
+                                                                    component={FormControl}/>remember me
+        </div>
         {error && <div>error</div>}
         {captchaUrl && <><img src={captchaUrl} alt="captcha"/>
-            <div><Field typeofform={"input"} placeholder={"symbols from image"} name={"captcha"} component={FormControl}
+            <div><Field style={{width: '300px', marginBottom: '16px'}} typeofform={"input"}
+                        placeholder={"symbols from image"} name={"captcha"} component={FormControl}
                         validate={[required]}/></div>
         </>}
         <div>
-          <button>Login</button>
+          <button className={s.button}>Login</button>
         </div>
       </form>
-    </>
+    </div>
   }
 )

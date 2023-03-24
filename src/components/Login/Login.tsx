@@ -5,15 +5,32 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {login} from "redux/auth-reducer";
 import {Redirect} from "react-router-dom";
+import {Separator} from "components/common";
+import s from './Login.module.css'
 
-const Login = ({login, isAuth, userId, captchaUrl}: LoginPropsType) => {
+const Login = ({login, isAuth, captchaUrl}: LoginPropsType) => {
   const onSubmit = (formData: formRegDataType) => {
     login(formData)
   }
-  return isAuth ? <Redirect to={"/profile"}/> : <>
-    <h1>Login</h1>
-    <LoginForm captchaUrl={captchaUrl} onSubmit={onSubmit}/>
-  </>
+  return isAuth
+    ? <Redirect to={"/profile"}/>
+    : <div className={s.loginContainer}>
+      <Separator title={'Login'}/>
+      <div className={s.loginBlock}>
+        <div>
+          <p>To log in get registered
+            <a href={'https://social-network.samuraijs.com/'}
+               target={'_blank'}> here
+            </a>
+          </p>
+          <p>or use common test account credentials:</p>
+          <p>Email: free@samuraijs.com</p>
+          <p>Password: free</p>
+        </div>
+        <LoginForm captchaUrl={captchaUrl} onSubmit={onSubmit}/>
+      </div>
+
+    </div>
 }
 
 type mapStateToPropsType = {
