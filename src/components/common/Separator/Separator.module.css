@@ -1,7 +1,6 @@
 .separator {
     display: flex;
     align-items: center;
-    padding-left: 100px;
     height: 90px;
     width: 100%;
     background-color: #f2f2f2;

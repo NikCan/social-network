@@ -22,6 +22,17 @@ export const Paginator = ({totalItemsCount, pageSize, onPageChanged, currentPage
   const [portionNumber, setPortionNumber] = useState<number>(1)
   const leftBorder = (portionNumber - 1) * portionSize + 1
   const rightBorder = portionNumber * portionSize
+  const page = pages
+    .filter(p => p >= leftBorder && p <= rightBorder)
+    .map((p, i) => {
+        return <span
+          key={i}
+          className={classNames({
+            [s.selectedPage]: p === currentPage
+          })}
+          onClick={() => onPageChanged(p)}>{p}</span>;
+      }
+    )
   const onPrevClickHandler = () => setPortionNumber(portionNumber - 1)
   const onNextClickHandler = () => setPortionNumber(portionNumber + 1)
   const onKeyRightHandler = (e: KeyboardEvent<HTMLButtonElement>) => {
@@ -38,17 +49,7 @@ export const Paginator = ({totalItemsCount, pageSize, onPageChanged, currentPage
                                 onClick={() => onPageChanged(firstPage)}>
       {firstPage}...
     </span>}
-    {pages
-      .filter(p => p >= leftBorder && p <= rightBorder)
-      .map((p, i) => {
-          return <span
-            key={i}
-            className={classNames({
-              [s.selectedPage]: p === currentPage
-            })}
-            onClick={() => onPageChanged(p)}>{p}</span>;
-        }
-      )}
+    {page}
     {portionNumber !== portionCount && <span className={classNames({[s.selectedPage]: lastPage === currentPage})}
                                              onClick={() => onPageChanged(lastPage)}>
       ...{lastPage}

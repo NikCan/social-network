@@ -1,21 +1,27 @@
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import React from "react";
 import {FormControl} from "components/common/FormsControls/FormsControls";
-import {maxLengthCreator, required} from "utils/validators/validator";
+import s from '../Profile/ProfileInfo/ProfileInfo.module.css'
 
 export type AddMessageFormPropsType = {
   newMessageBody: string
 }
-const maxLength15 = maxLengthCreator(15)
 export const AddMessageForm = reduxForm<AddMessageFormPropsType>({form: 'dialogAddMessageForm'})
-((props: InjectedFormProps<AddMessageFormPropsType>) => {
-  return <form onSubmit={props.handleSubmit}>
+(({reset, handleSubmit}: InjectedFormProps<AddMessageFormPropsType>) => {
+  const submitHandler = () => {
+    reset()
+    // @ts-ignore
+    handleSubmit()
+  }
+
+  return <form onSubmit={submitHandler}>
     <div>
-      <Field component={FormControl} name={"newMessageBody"} placeholder={"Enter your message"}
-             validate={[required, maxLength15]} typeofform={"textarea"}/>
+      <Field style={{width: '300px', height: '100px'}} component={FormControl} name={"newMessageBody"}
+             placeholder={"Enter your message"}
+             typeofform={"textarea"}/>
     </div>
     <div>
-      <button>Send</button>
+      <button className={s.button}>Send</button>
     </div>
   </form>
 })

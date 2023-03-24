@@ -1,11 +1,7 @@
 import React from "react";
-import s from "./News.module.css"
+import {Separator} from "components/common";
 
-type NewsType = {}
-
-export const News = (props: NewsType) => {
-    return <div>
-        News
-    </div>
+export const News = () => {
+    return <Separator title={'News'}/>
 }
 

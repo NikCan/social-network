@@ -1,4 +1,11 @@
+.usersContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .usersBlock {
+    padding: 50px;
 }
 
 .usersBlock span {

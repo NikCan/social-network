@@ -1,10 +1,7 @@
 import React from "react";
+import {Separator} from "components/common";
 
-type SettingsType = {}
-
-export const Settings = (props: SettingsType) => {
-    return <div>
-        Settings
-    </div>
+export const Settings = () => {
+  return <Separator title={'Settings'}/>
 }
 

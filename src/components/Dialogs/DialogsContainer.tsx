@@ -1,7 +1,7 @@
 import React, {ComponentType} from "react";
 import {
-    dialogsPageType,
-    sendMessageActionCreator,
+  dialogsPageType,
+  sendMessageActionCreator,
 } from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
@@ -10,25 +10,27 @@ import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hocs/withAuthRedirect";
 
 type mapStateToPropsType = {
-    dialogsPage: dialogsPageType
+  dialogsPage: dialogsPageType,
+  name: string
 }
 type mapDispatchToPropsType = {
-    sendMessage: (newMessage: string) => void
+  sendMessage: (newMessage: string, name: string) => void
 }
 export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: stateType): mapStateToPropsType => {
-    return {
-        dialogsPage: state.dialogsPage,
-    }
+  return {
+    dialogsPage: state.dialogsPage,
+    name: state.profilePage.profile?.fullName as string
+  }
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        sendMessage: (newMessage) => dispatch(sendMessageActionCreator(newMessage))
-    }
+  return {
+    sendMessage: (newMessage, name) => dispatch(sendMessageActionCreator(newMessage,name))
+  }
 }
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
 )(Dialogs)

@@ -2,25 +2,25 @@ import {dialogsPageType, dialogsReducer, sendMessageActionCreator} from "./dialo
 
 let startState: dialogsPageType
 beforeEach(() => {
-    startState = {
-        messages: [
-            {id: "1", text: "Hello"},
-            {id: "2", text: "How are you?"},
-            {id: "3", text: "Good bye"},
-        ],
-        dialogs: [
-            {id: "1", name: "Nikita"},
-            {id: "2", name: "Dasha"},
-            {id: "3", name: "Asya"},
-            {id: "4", name: "..."},
-        ],
-    }
+  startState = {
+    messages: [
+      {id: "1", text: "Hello"},
+      {id: "2", text: "How are you?"},
+      {id: "3", text: "Good bye"},
+    ],
+    dialogs: [
+      {id: "1", name: "Nikita"},
+      {id: "2", name: "Dasha"},
+      {id: "3", name: "Asya"},
+      {id: "4", name: "..."},
+    ],
+  }
 })
 
 test('correct message should be added in the end of list', () => {
-    const action = sendMessageActionCreator("test message")
-    const endState = dialogsReducer(startState, action)
+  const action = sendMessageActionCreator("test message", 'user')
+  const endState = dialogsReducer(startState, action)
 
-    expect(endState.messages.length).toBe(4)
-    expect(endState.messages[3].text).toBe("test message")
+  expect(endState.messages.length).toBe(4)
+  expect(endState.messages[3].text).toBe("test message")
 })

@@ -1,24 +1,20 @@
-.dialogs {
+.dialogContainer {
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
 
-.dialogs .dialogItems {
+.dialogItems {
     padding: 10px;
 }
 
-.dialogs .dialogItems .active {
+.dialogItems:active {
     color: gold;
 }
 
-.dialogs .dialogItems .dialog {
+.dialog {
 
 }
 
-.dialogs .messages {
+.messages {
     padding: 10px;
-}
-
-dialogs .messages .message {
-
 }

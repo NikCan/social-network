@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useRef, useState} from "react";
 import s from "./ProfileInfo.module.css"
 import {Preloader} from "components/common";
 import {UserProfileType} from "redux/profile-reducer";
@@ -18,7 +18,15 @@ type ProfileInfoPropsType = {
 
 export function ProfileInfo({profile, status, updateStatus, isOwner, savePhoto, updateProfile}: ProfileInfoPropsType) {
   const [editMode, setEditMode] = useState<boolean>(false)
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const saveDataHandler = (formData: FormProfileDataType) => {
+    updateProfile(formData).then(() => setEditMode(false))
+  }
+
+  const selectImgHandler = () => inputRef && inputRef.current?.click()
+
+  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
       const formData = new FormData();
@@ -26,17 +34,22 @@ export function ProfileInfo({profile, status, updateStatus, isOwner, savePhoto, 
       savePhoto(formData)
     }
   }
-  const saveDataHandler = (formData: FormProfileDataType) => {
-    updateProfile(formData).then(() => {
-      setEditMode(false)
-    })
-  }
+
   return !profile ? <Preloader/>
     : <>
       <div className={s.descriptionBlock}>
         <div>
           <img src={profile.photos.large || defaultPhoto} alt="user-avatar"/>
-          {isOwner && <div><input type="file" onChange={(e) => onChangeHandler(e)}/></div>}
+          {isOwner && <div>
+              <button className={s.button} onClick={selectImgHandler}>change ava</button>
+              <input
+                  style={{display: 'none'}}
+                  ref={inputRef}
+                  type="file"
+                  accept={'image/*'}
+                  onChange={uploadHandler}
+              />
+          </div>}
           <ProfileStatusFunc status={status} updateStatus={updateStatus}/>
         </div>
         <div>

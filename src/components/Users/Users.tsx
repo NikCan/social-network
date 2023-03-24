@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Users.module.css"
 import {userType} from "../../redux/users-reducer";
-import {Paginator} from "../common/Paginator/Paginator";
+import {Paginator, Separator} from "components/common";
 import {User} from "./User/User";
 
 type PropsType = {
@@ -25,17 +25,22 @@ export const Users = ({
                         currentPage
                       }: PropsType) => {
 
-  return <div className={s.usersBlock}>
-    <Paginator totalItemsCount={totalUsersCount}
-               onPageChanged={onPageChanged}
-               currentPage={currentPage}
-               pageSize={pageSize}/>
-    {users.map(user =>
-      <User user={user}
-            followingInProgress={followingInProgress}
-            followThunk={() => followThunk(user.id)}
-            unfollowThunk={() => unfollowThunk(user.id)}
-            key={user.id}/>
-    )}
+  const pageUsers = users.map(user =>
+    <User user={user}
+          followingInProgress={followingInProgress}
+          followThunk={() => followThunk(user.id)}
+          unfollowThunk={() => unfollowThunk(user.id)}
+          key={user.id}/>
+  )
+
+  return <div className={s.usersContainer}>
+    <Separator title={'Users'}/>
+    <div className={s.usersBlock}>
+      <Paginator totalItemsCount={totalUsersCount}
+                 onPageChanged={onPageChanged}
+                 currentPage={currentPage}
+                 pageSize={pageSize}/>
+      {pageUsers}
+    </div>
   </div>
 }

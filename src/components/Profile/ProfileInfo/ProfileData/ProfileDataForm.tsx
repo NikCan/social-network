@@ -26,18 +26,15 @@ export type FormProfileDataType = {
 }
 
 export const ProfileDataForm = reduxForm<FormProfileDataType, PropsType>({form: 'profileDataForm'})
-(({handleSubmit, error, contacts}: PropsType & InjectedFormProps<FormProfileDataType, PropsType>
+(({handleSubmit, contacts}: PropsType & InjectedFormProps<FormProfileDataType, PropsType>
   ) => {
     return (
       <form style={{width: '400px'}} onSubmit={handleSubmit}>
-        <div>
-          <button className={s.button}>save</button>
-        </div>
         <div><b>Full name</b><Field style={{width: '250px'}} name={"fullName"} component={FormControl}
                                     typeofform={"input"}/></div>
-        <div style={{display:'flex'}}><b>Looking for a job</b><Field name={"lookingForAJob"} component={FormControl}
-                                            typeofform={"input"}
-                                            type={'checkbox'}/></div>
+        <div style={{display: 'flex'}}><b>Looking for a job</b><Field name={"lookingForAJob"} component={FormControl}
+                                                                      typeofform={"input"}
+                                                                      type={'checkbox'}/></div>
         <div><b>My professional skills</b><Field style={{width: '250px'}} name={"lookingForAJobDescription"}
                                                  component={FormControl}
                                                  typeofform={"textarea"}/></div>
@@ -46,12 +43,21 @@ export const ProfileDataForm = reduxForm<FormProfileDataType, PropsType>({form: 
         <div><b>My contacts: </b>
           {(Object.keys(contacts) as Array<keyof typeof contacts>)
             .map((key, i) => {
-              return <div key={i}>{key}<Field style={{width: '250px'}} name={`contacts.${String(key)}`} component={FormControl}
-                                              typeofform={"input"}/></div>
+              return <div key={i}>
+                {key}
+                <Field
+                  style={{width: '250px'}}
+                  name={`contacts.${String(key)}`}
+                  component={FormControl}
+                  typeofform={"input"}
+                />
+              </div>
             })
           }
         </div>
-        {error && <div>{error}</div>}
+        <div>
+          <button className={s.button}>save</button>
+        </div>
       </form>
     )
   }

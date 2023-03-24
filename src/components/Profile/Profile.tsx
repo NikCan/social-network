@@ -5,7 +5,7 @@ import {UserProfileType} from "redux/profile-reducer";
 import {Redirect} from "react-router-dom";
 import {FormProfileDataType} from "./ProfileInfo/ProfileData/ProfileDataForm";
 import s from './Profile.module.css'
-import {Separator} from "../common/Separator/Separator";
+import {Separator} from "components/common";
 
 type PropsType = {
   profile: UserProfileType
@@ -33,7 +33,7 @@ export const Profile = ({profile, status, updateStatus, isAuth, isOwner, savePho
             status={status}
             updateStatus={updateStatus}
           />
-          <MyPostsContainer/>
+          {isOwner && <MyPostsContainer/>}
         </div>
       </>
 

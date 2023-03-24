@@ -14,19 +14,19 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 type PropsType = mapStateToPropsType & mapDispatchToPropsType
 
 class App extends React.Component<PropsType> {
-  catchAllUnhandledErrors = (error: PromiseRejectionEvent) => {
-    alert(error)
-    console.error(error)
-  }
+  // catchAllUnhandledErrors = (error: PromiseRejectionEvent) => {
+  //   alert(error)
+  //   console.error(error)
+  // }
 
   componentDidMount() {
     this.props.initializeApp()
-    window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    // window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
-  }
+  // componentWillUnmount() {
+  // window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+  // }
 
   render() {
     return !this.props.initialized ? <Preloader/> : (

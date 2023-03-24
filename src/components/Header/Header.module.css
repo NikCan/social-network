@@ -14,7 +14,6 @@
     padding-left: 50px;
     padding-right: 50px;
     max-width: 800px;
-    /*border: 1px solid white;*/
 }
 
 .loginButton {
@@ -25,5 +24,5 @@
 }
 
 .loginButton a {
-    color: white;
+    color: #43cb83;
 }
