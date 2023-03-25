@@ -20,7 +20,7 @@ export const User = ({user, unfollowThunk, followThunk, followingInProgress}: Pr
       </NavLink>
     </div>
     <div className={s.infoBlock}>
-      <div>{user.name}</div>
+      <div style={{overflowWrap: 'anywhere'}}>{user.name}</div>
       <div>{user.status}</div>
       <div>{user.location?.country}</div>
       <div>{user.location?.city}</div>
