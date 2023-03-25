@@ -21,7 +21,7 @@ export const User = ({user, unfollowThunk, followThunk, followingInProgress}: Pr
     </div>
     <div className={s.infoBlock}>
       <div style={{overflowWrap: 'anywhere'}}>{user.name}</div>
-      <div>{user.status}</div>
+      <div style={{overflowWrap: 'anywhere'}}>{user.status}</div>
       <div>{user.location?.country}</div>
       <div>{user.location?.city}</div>
     </div>
