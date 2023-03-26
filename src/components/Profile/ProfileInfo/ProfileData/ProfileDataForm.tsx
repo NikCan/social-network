@@ -29,7 +29,7 @@ export const ProfileDataForm = reduxForm<FormProfileDataType, PropsType>({form: 
 (({handleSubmit, contacts}: PropsType & InjectedFormProps<FormProfileDataType, PropsType>
   ) => {
     return (
-      <form style={{width: '400px'}} onSubmit={handleSubmit}>
+      <form style={{width: '300px'}} onSubmit={handleSubmit}>
         <div><b>Full name</b><Field style={{width: '250px'}} name={"fullName"} component={FormControl}
                                     typeofform={"input"}/></div>
         <div style={{display: 'flex'}}><b>Looking for a job</b><Field name={"lookingForAJob"} component={FormControl}
